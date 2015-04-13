@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/russmack/cloudsigma"
 	"io/ioutil"
-	"private/russmack/cloudsigma"
 )
 
 type Config struct {
