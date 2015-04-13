@@ -1,0 +1,7 @@
+config.json is tracked, but with invalid login values - 
+we don't want to commit valid login values!
+
+.gitignore and .git/info/exclude don't ignore tracked files, so
+the following has been run to enable changing login values while ignoring the tracked file:
+git update-index --assume-unchanged examples/config.json
+
