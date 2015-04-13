@@ -2,7 +2,7 @@
 
 A Golang REST client for CloudSigma IaaS.
 
-[![Build Status](https://travis-ci.org/russmack/cloudsigma.svg?branch=master)](https://travis-ci.org/russmack/cloudsigmaa
+[![Build Status](https://travis-ci.org/russmack/cloudsigma.svg?branch=master)](https://travis-ci.org/russmack/cloudsigma)
 
 ---
 #### Status: Started.
