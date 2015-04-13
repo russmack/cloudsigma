@@ -1,13 +1,10 @@
 package main
 
 import (
-	//"bufio"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	//"os"
 	"private/russmack/cloudsigma"
-	//"strings"
 )
 
 type Config struct {
@@ -21,6 +18,7 @@ func main() {
 	username := cfg.Username
 	password := cfg.Password
 
+	// TODO:
 	//resp := cloudsigma.GetApiUrls()
 	//resp := cloudsigma.GetCloudStatus()
 	//resp := cloudsigma.GetUser(username, password)
