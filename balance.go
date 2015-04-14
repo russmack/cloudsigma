@@ -1,7 +1,7 @@
 package cloudsigma
 
 const (
-	EndpointBalance = "balance/"
+	EndpointBalance = "balance"
 )
 
 // Balance

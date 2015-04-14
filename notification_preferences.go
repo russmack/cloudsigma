@@ -1,7 +1,7 @@
 package cloudsigma
 
 const (
-	EndpointNotificationPreferences = "notification_preferences/"
+	EndpointNotificationPreferences = "notification_preferences"
 )
 
 // NotificationPreferences

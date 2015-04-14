@@ -71,7 +71,7 @@ func (c *Client) buildBaseUrl() string {
 
 // buildResourceUrl returns the url for a specified resource.
 func (c *Client) buildResourceUrl(resource string) string {
-	return c.buildBaseUrl() + resource
+	return c.buildBaseUrl() + resource + "/"
 }
 
 // AddHeader adds a header to the Headers field of an Args object.
