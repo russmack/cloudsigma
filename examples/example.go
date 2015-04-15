@@ -29,8 +29,13 @@ func main() {
 	//resp := cloudsigma.GetNotificationContacts()
 	//resp := cloudsigma.GetDrives()
 
+	// Get servers.
+	resp := getServers(username, password)
+	fmt.Println("Response:")
+	fmt.Println(string(resp))
+
 	// Get balance.
-	resp := getBalance(username, password)
+	resp = getBalance(username, password)
 	fmt.Println("Response:")
 	fmt.Println(string(resp))
 
@@ -56,6 +61,23 @@ func getLogin() (Config, error) {
 		panic(err)
 	}
 	return cfg, err
+}
+
+func getServers(username string, password string) []byte {
+	// Create a Servers.
+	o := cloudsigma.NewServers()
+	args := o.NewGet()
+	args.Username = username
+	args.Password = password
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.")
+		panic(err)
+	}
+	return resp
 }
 
 func getBalance(username string, password string) []byte {
