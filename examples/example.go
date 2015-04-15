@@ -29,8 +29,13 @@ func main() {
 	//resp := cloudsigma.GetNotificationContacts()
 	//resp := cloudsigma.GetDrives()
 
+	// Get cloudstatus.
+	resp := getCloudStatus(username, password)
+	fmt.Println("Response:")
+	fmt.Println(string(resp))
+
 	// Get servers.
-	resp := getServers(username, password)
+	resp = getServers(username, password)
 	fmt.Println("Response:")
 	fmt.Println(string(resp))
 
@@ -61,6 +66,23 @@ func getLogin() (Config, error) {
 		panic(err)
 	}
 	return cfg, err
+}
+
+func getCloudStatus(username string, password string) []byte {
+	// Create a CloudStatus.
+	o := cloudsigma.NewCloudStatus()
+	args := o.NewGet()
+	args.Username = username
+	args.Password = password
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.")
+		panic(err)
+	}
+	return resp
 }
 
 func getServers(username string, password string) []byte {
