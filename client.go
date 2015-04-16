@@ -71,7 +71,11 @@ func (c *Client) buildBaseUrl() string {
 
 // buildResourceUrl returns the url for a specified resource.
 func (c *Client) buildResourceUrl(resource string) string {
-	return c.buildBaseUrl() + resource + "/"
+	u := c.buildBaseUrl() + resource
+	if resource != "" {
+		u += "/"
+	}
+	return u
 }
 
 // AddHeader adds a header to the Headers field of an Args object.
@@ -142,12 +146,14 @@ func (c *Client) sendRequest(req *CloudSigmaRequest) ([]byte, error) {
 	client := http.Client{}
 	resp, err := client.Do(req.Request)
 	if err != nil {
+		log.Println("Error in client.Do.")
 		log.Println(err)
 		return []byte{}, err
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		log.Println("Error in ioutil.ReadAll.")
 		return []byte{}, err
 	}
 	return body, nil
