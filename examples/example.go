@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/russmack/cloudsigma"
 	"io/ioutil"
+	"os"
 )
 
 type Config struct {
@@ -13,7 +14,11 @@ type Config struct {
 }
 
 func main() {
-	cfg, _ := getLogin()
+	cfg, err := getLogin()
+	if err != nil {
+		fmt.Println("Error getting login credentials.", err)
+		os.Exit(1)
+	}
 	fmt.Println("\nUsing login: ", cfg.Username, "\n")
 	username := cfg.Username
 	password := cfg.Password
@@ -42,12 +47,12 @@ func main() {
 func getLogin() (Config, error) {
 	f, err := ioutil.ReadFile("config.json")
 	if err != nil {
-		panic(err)
+		return Config{}, err
 	}
 	cfg := Config{}
 	err = json.Unmarshal(f, &cfg)
 	if err != nil {
-		panic(err)
+		return Config{}, err
 	}
 	return cfg, err
 }
