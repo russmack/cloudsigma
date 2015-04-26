@@ -11,7 +11,8 @@ A Golang REST client for CloudSigma IaaS.
 ## Usage
 ```
 Set your login in the examples/config.json.
-go run examples/example.go
+cd examples
+go run example.go
 ```
 
 ## License
