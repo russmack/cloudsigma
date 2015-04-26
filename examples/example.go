@@ -14,7 +14,7 @@ type Config struct {
 
 func main() {
 	cfg, _ := getLogin()
-	fmt.Println("Using login: ", cfg.Username)
+	fmt.Println("\nUsing login: ", cfg.Username, "\n")
 	username := cfg.Username
 	password := cfg.Password
 
@@ -61,8 +61,8 @@ func getApiUrls(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
@@ -78,8 +78,8 @@ func getCloudStatus(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
@@ -95,8 +95,8 @@ func getCurrentUsage(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
@@ -112,8 +112,8 @@ func getUsage(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
@@ -129,8 +129,8 @@ func getServers(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
@@ -146,8 +146,8 @@ func getDrives(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
@@ -163,8 +163,8 @@ func getBalance(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
@@ -180,8 +180,8 @@ func getSubscriptions(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
@@ -197,8 +197,8 @@ func getNotificationContacts(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
@@ -214,8 +214,8 @@ func getNotificationPreferences(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
@@ -239,8 +239,8 @@ func setNotificationPreference(username string, password string) []byte {
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.")
-		panic(err)
+		fmt.Println("Error calling client.", err)
+		return []byte{}
 	}
 	return resp
 }
