@@ -6,21 +6,21 @@ import (
 	"os"
 )
 
-type Config struct {
-	Username string
-	Password string
-}
-
 func main() {
 	config := cloudsigma.NewConfig()
-	cfg, err := config.GetLogin()
+	_, err := config.Load()
+	if err != nil {
+		fmt.Println("Unable to load config.", err)
+		os.Exit(1)
+	}
+	login := config.Login()
 	if err != nil {
 		fmt.Println("Error getting login credentials.", err)
 		os.Exit(1)
 	}
-	fmt.Println("\nUsing login: ", cfg.Username, "\n")
-	username := cfg.Username
-	password := cfg.Password
+	fmt.Println("\nUsing login: ", login.Username, "\n")
+	username := login.Username
+	password := login.Password
 
 	calls := map[string]func(string, string) []byte{
 		"ApiUrls":                    getApiUrls,
