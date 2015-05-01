@@ -142,7 +142,6 @@ func (c *Client) buildRequest(args Args) (*CloudSigmaRequest, error) {
 
 // sendRequest sends the given http CloudSigmaRequest and returns the result.
 func (c *Client) sendRequest(req *CloudSigmaRequest) ([]byte, error) {
-	log.Printf("Getting: %v\n\n", req.URL)
 	client := http.Client{}
 	resp, err := client.Do(req.Request)
 	if err != nil {
