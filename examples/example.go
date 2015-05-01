@@ -1,10 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/russmack/cloudsigma"
-	"io/ioutil"
 	"os"
 )
 
@@ -14,7 +12,8 @@ type Config struct {
 }
 
 func main() {
-	cfg, err := getLogin()
+	config := cloudsigma.NewConfig()
+	cfg, err := config.GetLogin()
 	if err != nil {
 		fmt.Println("Error getting login credentials.", err)
 		os.Exit(1)
@@ -42,19 +41,6 @@ func main() {
 		fmt.Println("Response (" + k + ") :")
 		fmt.Println(string(resp) + "\n")
 	}
-}
-
-func getLogin() (Config, error) {
-	f, err := ioutil.ReadFile("config.json")
-	if err != nil {
-		return Config{}, err
-	}
-	cfg := Config{}
-	err = json.Unmarshal(f, &cfg)
-	if err != nil {
-		return Config{}, err
-	}
-	return cfg, err
 }
 
 func getApiUrls(username string, password string) []byte {
