@@ -14,10 +14,6 @@ func main() {
 		os.Exit(1)
 	}
 	login := config.Login()
-	if err != nil {
-		fmt.Println("Error getting login credentials.", err)
-		os.Exit(1)
-	}
 	fmt.Println("\nUsing login: ", login.Username, "\n")
 	username := login.Username
 	password := login.Password
