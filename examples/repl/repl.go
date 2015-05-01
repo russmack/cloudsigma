@@ -25,6 +25,7 @@ func main() {
 	// Create a statemachine per command available in the repl.
 	repl.InstrMachineMap["cloud status"] = NewMachineCloudStatus().Start
 	repl.InstrMachineMap["usage"] = NewMachineUsage().Start
+	repl.InstrMachineMap["balance"] = NewMachineBalance().Start
 	repl.InstrMachineMap["create server"] = NewMachineCreateServer().Start
 	repl.Start()
 }

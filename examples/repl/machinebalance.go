@@ -6,30 +6,30 @@ import (
 	"github.com/russmack/statemachiner"
 )
 
-type CommandUsage struct {
+type CommandBalance struct {
 	responseChan chan string
 	promptChan   chan string
 	userChan     chan string
 }
 
-func NewMachineUsage() *CommandUsage {
-	return &CommandUsage{}
+func NewMachineBalance() *CommandBalance {
+	return &CommandBalance{}
 }
 
-func (m *CommandUsage) Start(respChan chan string, promptChan chan string, userChan chan string) {
-	fmt.Println("starting usage...")
+func (m *CommandBalance) Start(respChan chan string, promptChan chan string, userChan chan string) {
+	fmt.Println("starting balance...")
 	m.responseChan = respChan
 	m.promptChan = promptChan
 	m.userChan = userChan
 	stateMachine := &statemachiner.StateMachine{}
-	stateMachine.StartState = m.getUsage
-	cargo := CommandUsage{}
+	stateMachine.StartState = m.getBalance
+	cargo := CommandBalance{}
 	stateMachine.Start(cargo)
 }
 
-func (m *CommandUsage) getUsage(cargo interface{}) statemachiner.StateFn {
+func (m *CommandBalance) getBalance(cargo interface{}) statemachiner.StateFn {
 	fmt.Printf("Final cmd:%+v\n", cargo)
-	o := cloudsigma.NewUsage()
+	o := cloudsigma.NewBalance()
 	args := o.NewGet()
 	fmt.Println("Username:", config.Login().Username)
 	args.Username = config.Login().Username
