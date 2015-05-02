@@ -14,7 +14,9 @@ Set your login in the examples/config.json.
 cd examples
 go run example.go
 Or
-go run repl.go machinecreateserver.go machinecloudstatus.go
+cd examples/repl
+go build
+./repl
 ```
 
 ## License
