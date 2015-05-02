@@ -17,7 +17,6 @@ func NewMachineUsage() *CommandUsage {
 }
 
 func (m *CommandUsage) Start(respChan chan string, promptChan chan string, userChan chan string) {
-	fmt.Println("starting usage...")
 	m.responseChan = respChan
 	m.promptChan = promptChan
 	m.userChan = userChan
@@ -28,7 +27,6 @@ func (m *CommandUsage) Start(respChan chan string, promptChan chan string, userC
 }
 
 func (m *CommandUsage) getUsage(cargo interface{}) statemachiner.StateFn {
-	fmt.Printf("Final cmd:%+v\n", cargo)
 	o := cloudsigma.NewUsage()
 	args := o.NewGet()
 	fmt.Println("Username:", config.Login().Username)

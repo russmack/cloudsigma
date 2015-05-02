@@ -17,7 +17,6 @@ func NewMachineBalance() *CommandBalance {
 }
 
 func (m *CommandBalance) Start(respChan chan string, promptChan chan string, userChan chan string) {
-	fmt.Println("starting balance...")
 	m.responseChan = respChan
 	m.promptChan = promptChan
 	m.userChan = userChan
@@ -28,7 +27,6 @@ func (m *CommandBalance) Start(respChan chan string, promptChan chan string, use
 }
 
 func (m *CommandBalance) getBalance(cargo interface{}) statemachiner.StateFn {
-	fmt.Printf("Final cmd:%+v\n", cargo)
 	o := cloudsigma.NewBalance()
 	args := o.NewGet()
 	fmt.Println("Username:", config.Login().Username)

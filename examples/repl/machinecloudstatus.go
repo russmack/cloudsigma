@@ -17,7 +17,6 @@ func NewMachineCloudStatus() *CommandCloudStatus {
 }
 
 func (m *CommandCloudStatus) Start(respChan chan string, promptChan chan string, userChan chan string) {
-	fmt.Println("starting cloud status...")
 	m.responseChan = respChan
 	m.promptChan = promptChan
 	m.userChan = userChan
@@ -28,7 +27,6 @@ func (m *CommandCloudStatus) Start(respChan chan string, promptChan chan string,
 }
 
 func (m *CommandCloudStatus) getCloudStatus(cargo interface{}) statemachiner.StateFn {
-	fmt.Printf("Final cmd:%+v\n", cargo)
 	o := cloudsigma.NewCloudStatus()
 	args := o.NewGet()
 	client := &cloudsigma.Client{}
