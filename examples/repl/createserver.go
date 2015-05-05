@@ -16,7 +16,7 @@ type CommandCreateServer struct {
 	userChan     chan string
 }
 
-func NewMachineCreateServer() *CommandCreateServer {
+func NewCreateServer() *CommandCreateServer {
 	return &CommandCreateServer{}
 }
 

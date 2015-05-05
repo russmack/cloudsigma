@@ -12,7 +12,7 @@ type CommandUsage struct {
 	userChan     chan string
 }
 
-func NewMachineUsage() *CommandUsage {
+func NewUsage() *CommandUsage {
 	return &CommandUsage{}
 }
 

@@ -12,7 +12,7 @@ type CommandCloudStatus struct {
 	userChan     chan string
 }
 
-func NewMachineCloudStatus() *CommandCloudStatus {
+func NewCloudStatus() *CommandCloudStatus {
 	return &CommandCloudStatus{}
 }
 

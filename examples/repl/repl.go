@@ -23,9 +23,9 @@ func main() {
 	repl := replizer.NewRepl()
 	repl.Name = "CloudSigma IaaS"
 	// Create a statemachine per command available in the repl.
-	repl.InstrMachineMap["cloud status"] = NewMachineCloudStatus().Start
-	repl.InstrMachineMap["usage"] = NewMachineUsage().Start
-	repl.InstrMachineMap["balance"] = NewMachineBalance().Start
-	repl.InstrMachineMap["create server"] = NewMachineCreateServer().Start
+	repl.Add("cloud status", NewCloudStatus().Start)
+	repl.Add("usage", NewUsage().Start)
+	repl.Add("balance", NewBalance().Start)
+	repl.Add("create server", NewCreateServer().Start)
 	repl.Start()
 }

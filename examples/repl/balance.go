@@ -12,7 +12,7 @@ type CommandBalance struct {
 	userChan     chan string
 }
 
-func NewMachineBalance() *CommandBalance {
+func NewBalance() *CommandBalance {
 	return &CommandBalance{}
 }
 
