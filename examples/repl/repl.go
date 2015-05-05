@@ -27,6 +27,7 @@ func main() {
 	repl.Add("usage", NewUsage().Start)
 	repl.Add("balance", NewBalance().Start)
 	repl.Add("create server", NewCreateServer().Start)
+	repl.Add("notification contacts", NewGetNotifyContacts().Start)
 	repl.Add("notification preferences", NewGetNotifyPrefs().Start)
 	repl.Start()
 }
