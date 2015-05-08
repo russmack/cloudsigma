@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/russmack/cloudsigma"
 	"github.com/russmack/statemachiner"
-	"strconv"
 )
 
 type CommandGetNotifyContacts struct {
@@ -14,10 +13,9 @@ type CommandGetNotifyContacts struct {
 }
 
 type CommandSetNotifyContacts struct {
-	Contact      string `json:"contact"`
-	Medium       int    `json:"medium"`
-	Type         int    `json:"type"`
-	Value        string `json:"value"`
+	Email        string `json:"email"`
+	Name         string `json:"name"`
+	Phone        string `json:"phone"`
 	responseChan chan string
 	promptChan   chan string
 	userChan     chan string
@@ -57,53 +55,43 @@ func (m *CommandSetNotifyContacts) Start(respChan chan string, promptChan chan s
 	m.promptChan = promptChan
 	m.userChan = userChan
 	stateMachine := &statemachiner.StateMachine{}
-	stateMachine.StartState = m.setNotifyContactsContact
+	stateMachine.StartState = m.setNotifyContactsEmail
 	cargo := CommandSetNotifyContacts{}
 	stateMachine.Start(cargo)
 }
 
-func (m *CommandSetNotifyContacts) setNotifyContactsContact(cargo interface{}) statemachiner.StateFn {
+func (m *CommandSetNotifyContacts) setNotifyContactsEmail(cargo interface{}) statemachiner.StateFn {
 	// The state machine will not progress beyond this point until the repl
 	// pops from the promptChan.
-	m.promptChan <- "Contact:"
-	n := <-m.userChan
+	m.promptChan <- "Email:"
+	s := <-m.userChan
 	c, ok := cargo.(CommandSetNotifyContacts)
 	if ok {
-		c.Contact = n
+		c.Email = s
 	} else {
 		fmt.Println("assertion not ok")
 	}
-	return m.setNotifyContactsMedium(c)
+	return m.setNotifyContactsName(c)
 }
 
-func (m *CommandSetNotifyContacts) setNotifyContactsMedium(cargo interface{}) statemachiner.StateFn {
-	m.promptChan <- "Medium:"
+func (m *CommandSetNotifyContacts) setNotifyContactsName(cargo interface{}) statemachiner.StateFn {
+	m.promptChan <- "Name:"
 	s := <-m.userChan
 	c, ok := cargo.(CommandSetNotifyContacts)
 	if ok {
-		n, err := strconv.Atoi(s)
-		if err != nil {
-			fmt.Println("this should be a request to re-enter info")
-		} else {
-			c.Medium = n
-		}
+		c.Name = s
 	} else {
 		fmt.Println("asserton not ok")
 	}
-	return m.setNotifyContactsType(c)
+	return m.setNotifyContactsPhone(c)
 }
 
-func (m *CommandSetNotifyContacts) setNotifyContactsType(cargo interface{}) statemachiner.StateFn {
-	m.promptChan <- "Type:"
+func (m *CommandSetNotifyContacts) setNotifyContactsPhone(cargo interface{}) statemachiner.StateFn {
+	m.promptChan <- "Phone:"
 	s := <-m.userChan
 	c, ok := cargo.(CommandSetNotifyContacts)
 	if ok {
-		n, err := strconv.Atoi(s)
-		if err != nil {
-			fmt.Println("this should be a request to re-enter info")
-		} else {
-			c.Type = n
-		}
+		c.Phone = s
 	} else {
 		fmt.Println("assertion not ok")
 	}
