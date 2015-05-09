@@ -18,6 +18,6 @@ func NewCapabilities() *Capabilities {
 // NewGet returns the args required for a Capabilities GET request.
 func (o *Capabilities) NewGet() Args {
 	o.Args.Verb = "GET"
-	//o.Args.RequiresAuth = true
+	o.Args.RequiresAuth = true
 	return o.Args
 }
