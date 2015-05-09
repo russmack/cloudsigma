@@ -5,10 +5,12 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
@@ -27,6 +29,7 @@ type Args struct {
 	RequiresAuth bool
 	Username     string
 	Password     string
+	Location     string
 }
 
 // Header is a name value pair http header.
@@ -45,7 +48,7 @@ type CloudSigmaRequest struct {
 
 const (
 	BaseUrl         = "https://%s/api/%s/"
-	ApiEndpoint     = "zrh.cloudsigma.com"
+	ApiEndpoint     = "%s.cloudsigma.com"
 	ApiVersion      = "2.0"
 	UrlResourceList = "%s/"
 	UrlResource     = "%s/%s"
@@ -65,17 +68,29 @@ func NewClient() *Client {
 }
 
 // buildBaseUrl returns the url on which all requests are built.
-func (c *Client) buildBaseUrl() string {
-	return fmt.Sprintf(BaseUrl, ApiEndpoint, ApiVersion)
+func (c *Client) buildBaseUrl(location string) (string, error) {
+	if location == "" {
+		return "", errors.New("Location cannot be empty.")
+	}
+	apiEndpoint := fmt.Sprintf(ApiEndpoint, location)
+	return fmt.Sprintf(BaseUrl, apiEndpoint, ApiVersion), nil
 }
 
 // buildResourceUrl returns the url for a specified resource.
-func (c *Client) buildResourceUrl(resource string) string {
-	u := c.buildBaseUrl() + resource
+func (c *Client) buildResourceUrl(location string, resource string) (*url.URL, error) {
+	u, err := c.buildBaseUrl(location)
+	if err != nil {
+		return &url.URL{}, err
+	}
+	u += resource
 	if resource != "" {
 		u += "/"
 	}
-	return u
+	newUrl, err := url.Parse(u)
+	if err != nil {
+		return &url.URL{}, err
+	}
+	return newUrl, nil
 }
 
 // AddHeader adds a header to the Headers field of an Args object.
@@ -105,7 +120,17 @@ func (c *Client) Call(args Args) ([]byte, error) {
 
 // buildRequest creates a http CloudSigmaRequest with the supplied Args.
 func (c *Client) buildRequest(args Args) (*CloudSigmaRequest, error) {
-	url := c.buildResourceUrl(args.Resource)
+	u, err := c.buildResourceUrl(args.Location, args.Resource)
+	if err != nil {
+		return nil, err
+	}
+
+	// Add querystring params.
+	params := url.Values{}
+	for k, v := range args.GetReqParams {
+		params.Add(k, v)
+	}
+	u.RawQuery = params.Encode()
 
 	// Build the json body if required.
 	bodybuf := bytes.NewBuffer([]byte{})
@@ -119,7 +144,7 @@ func (c *Client) buildRequest(args Args) (*CloudSigmaRequest, error) {
 	}
 
 	// Build the request.
-	newreq, err := http.NewRequest(strings.ToUpper(args.Verb), url, bodybuf)
+	newreq, err := http.NewRequest(strings.ToUpper(args.Verb), u.String(), bodybuf)
 	req := CloudSigmaRequest{Request: newreq}
 	if err != nil {
 		log.Println(err)
@@ -127,7 +152,7 @@ func (c *Client) buildRequest(args Args) (*CloudSigmaRequest, error) {
 	}
 
 	// Build headers list.
-	// Seems it's safe to add this to all requests.
+	// TODO: this should be optionally xml - json is default.
 	args.AddHeader(Header{"Content-Type", "application/json"})
 
 	// Add auth if required.
@@ -150,6 +175,10 @@ func (c *Client) sendRequest(req *CloudSigmaRequest) ([]byte, error) {
 		return []byte{}, err
 	}
 	defer resp.Body.Close()
+	// TODO: improve this.
+	if resp.StatusCode != 200 {
+		return []byte{}, errors.New(resp.Status)
+	}
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Println("Error in ioutil.ReadAll.")

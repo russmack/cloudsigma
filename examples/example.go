@@ -17,8 +17,9 @@ func main() {
 	fmt.Println("\nUsing login: ", login.Username, "\n")
 	username := login.Username
 	password := login.Password
+	location := "zrh"
 
-	calls := map[string]func(string, string) []byte{
+	calls := map[string]func(string, string, string) []byte{
 		"ApiUrls":                    getApiUrls,
 		"CloudStatus":                getCloudStatus,
 		"Locations":                  getLocations,
@@ -35,16 +36,17 @@ func main() {
 	}
 
 	for k, v := range calls {
-		resp := v(username, password)
+		resp := v(location, username, password)
 		fmt.Println("Response (" + k + ") :")
 		fmt.Println(string(resp) + "\n")
 	}
 }
 
-func getApiUrls(username string, password string) []byte {
+func getApiUrls(location string, username string, password string) []byte {
 	// Create an ApiUrls.
 	o := cloudsigma.NewApiUrls()
 	args := o.NewGet()
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -56,12 +58,13 @@ func getApiUrls(username string, password string) []byte {
 	return resp
 }
 
-func getCloudStatus(username string, password string) []byte {
+func getCloudStatus(location string, username string, password string) []byte {
 	// Create a CloudStatus.
 	o := cloudsigma.NewCloudStatus()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -73,12 +76,13 @@ func getCloudStatus(username string, password string) []byte {
 	return resp
 }
 
-func getLocations(username string, password string) []byte {
+func getLocations(location string, username string, password string) []byte {
 	// Create a Locations.
 	o := cloudsigma.NewLocations()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -90,29 +94,31 @@ func getLocations(username string, password string) []byte {
 	return resp
 }
 
-func getCapabilities(username string, password string) []byte {
+func getCapabilities(location string, username string, password string) []byte {
 	// Create a Capabilities.
 	o := cloudsigma.NewCapabilities()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
-		return []byte{}
+		return []byte(err.Error())
 	}
 	return resp
 }
 
-func getCurrentUsage(username string, password string) []byte {
+func getCurrentUsage(location string, username string, password string) []byte {
 	// Create a CurrentUsage.
 	o := cloudsigma.NewCurrentUsage()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -124,12 +130,13 @@ func getCurrentUsage(username string, password string) []byte {
 	return resp
 }
 
-func getUsage(username string, password string) []byte {
+func getUsage(location string, username string, password string) []byte {
 	// Create a Usage.
 	o := cloudsigma.NewUsage()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -141,12 +148,13 @@ func getUsage(username string, password string) []byte {
 	return resp
 }
 
-func getServers(username string, password string) []byte {
+func getServers(location string, username string, password string) []byte {
 	// Create a Servers.
 	o := cloudsigma.NewServers()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -158,12 +166,13 @@ func getServers(username string, password string) []byte {
 	return resp
 }
 
-func getDrives(username string, password string) []byte {
+func getDrives(location string, username string, password string) []byte {
 	// Create a Drives.
 	o := cloudsigma.NewDrives()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -175,12 +184,13 @@ func getDrives(username string, password string) []byte {
 	return resp
 }
 
-func getBalance(username string, password string) []byte {
+func getBalance(location string, username string, password string) []byte {
 	// Create a Balance.
 	o := cloudsigma.NewBalance()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -192,12 +202,13 @@ func getBalance(username string, password string) []byte {
 	return resp
 }
 
-func getSubscriptions(username string, password string) []byte {
+func getSubscriptions(location string, username string, password string) []byte {
 	// Create a Subscriptions.
 	o := cloudsigma.NewSubscriptions()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -209,12 +220,13 @@ func getSubscriptions(username string, password string) []byte {
 	return resp
 }
 
-func getNotificationContacts(username string, password string) []byte {
+func getNotificationContacts(location string, username string, password string) []byte {
 	// Create a NotificationContacts
 	o := cloudsigma.NewNotificationContacts()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -226,12 +238,13 @@ func getNotificationContacts(username string, password string) []byte {
 	return resp
 }
 
-func getNotificationPreferences(username string, password string) []byte {
+func getNotificationPreferences(location string, username string, password string) []byte {
 	// Create a NotificationPreferences
 	o := cloudsigma.NewNotificationPreferences()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -243,7 +256,7 @@ func getNotificationPreferences(username string, password string) []byte {
 	return resp
 }
 
-func setNotificationPreference(username string, password string) []byte {
+func setNotificationPreference(location string, username string, password string) []byte {
 	// Create the object to post as body.
 	p := cloudsigma.Preference{
 		Contact: "/api/2.0/notification_contacts/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/",
@@ -257,6 +270,7 @@ func setNotificationPreference(username string, password string) []byte {
 	args := o.NewSet(p)
 	args.Username = username
 	args.Password = password
+	args.Location = location
 
 	// Create a client.
 	client := &cloudsigma.Client{}
