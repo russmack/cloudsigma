@@ -21,6 +21,8 @@ func main() {
 	calls := map[string]func(string, string) []byte{
 		"ApiUrls":                    getApiUrls,
 		"CloudStatus":                getCloudStatus,
+		"Locations":                  getLocations,
+		"Capbilites":                 getCapabilities,
 		"CurrentUsage":               getCurrentUsage,
 		"Usage":                      getUsage,
 		"Servers":                    getServers,
@@ -57,6 +59,40 @@ func getApiUrls(username string, password string) []byte {
 func getCloudStatus(username string, password string) []byte {
 	// Create a CloudStatus.
 	o := cloudsigma.NewCloudStatus()
+	args := o.NewGet()
+	args.Username = username
+	args.Password = password
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+
+func getLocations(username string, password string) []byte {
+	// Create a Locations.
+	o := cloudsigma.NewLocations()
+	args := o.NewGet()
+	args.Username = username
+	args.Password = password
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+
+func getCapabilities(username string, password string) []byte {
+	// Create a Capabilities.
+	o := cloudsigma.NewCapabilities()
 	args := o.NewGet()
 	args.Username = username
 	args.Password = password
