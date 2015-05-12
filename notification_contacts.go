@@ -9,6 +9,13 @@ type NotificationContacts struct {
 	Args Args
 }
 
+// Contact object.
+type Contact struct {
+	Email string `json:"email"`
+	Name  string `json:"name"`
+	Phone string `json:"phone"`
+}
+
 // NewNotificationContacts returns a NotificationContacts object.
 func NewNotificationContacts() *NotificationContacts {
 	o := NotificationContacts{}
