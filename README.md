@@ -11,13 +11,13 @@ A Golang REST client for CloudSigma IaaS.
 ## Usage
 ```
 Set your login in the examples/config.json.
+Instructions on their way; meanwhile:
 cd examples
 go run example.go
-Or
-cd examples/repl
-go build
-./repl
 ```
+See another example at:
+https://github.com/russmack/cloudsigmarepl
+
 
 ## License
 BSD 3-Clause: [LICENSE.txt](LICENSE.txt)
