@@ -6,7 +6,7 @@ const (
 
 // NotificationPreferences
 type NotificationPreferences struct {
-	Args Args
+	Args *Args
 }
 
 // Preference is the object representing a notification preference.
@@ -21,19 +21,20 @@ type Preference struct {
 // endpoint url set.
 func NewNotificationPreferences() *NotificationPreferences {
 	o := NotificationPreferences{}
-	o.Args = Args{Resource: EndpointNotificationPreferences}
+	o.Args = NewArgs()
+	o.Args.Resource = EndpointNotificationPreferences
 	return &o
 }
 
 // NewGet returns the args required to get all notification preferences.
-func (o *NotificationPreferences) NewGet() Args {
+func (o *NotificationPreferences) NewGet() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args
 }
 
 // NewSet returns the args required to update a specified notification preference.
-func (o *NotificationPreferences) NewSet(pref Preference) Args {
+func (o *NotificationPreferences) NewSet(pref Preference) *Args {
 	o.Args.Verb = "PUT"
 	o.Args.RequiresAuth = true
 	o.Args.Body = pref

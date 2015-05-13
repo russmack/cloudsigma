@@ -30,6 +30,7 @@ type Args struct {
 	Username     string
 	Password     string
 	Location     string
+	Format       string
 }
 
 // Header is a name value pair http header.
@@ -58,6 +59,7 @@ const (
 // NewArgs returns an Args object.
 func NewArgs() *Args {
 	a := Args{}
+	a.GetReqParams = make(map[string]string)
 	return &a
 }
 
@@ -106,7 +108,7 @@ func (r *CloudSigmaRequest) AddHeaders(headers []Header) {
 }
 
 // Call builds and sends a request, given Args, and returns the http result.
-func (c *Client) Call(args Args) ([]byte, error) {
+func (c *Client) Call(args *Args) ([]byte, error) {
 	req, err := c.buildRequest(args)
 	if err != nil {
 		return nil, err
@@ -119,11 +121,21 @@ func (c *Client) Call(args Args) ([]byte, error) {
 }
 
 // buildRequest creates a http CloudSigmaRequest with the supplied Args.
-func (c *Client) buildRequest(args Args) (*CloudSigmaRequest, error) {
+func (c *Client) buildRequest(args *Args) (*CloudSigmaRequest, error) {
 	u, err := c.buildResourceUrl(args.Location, args.Resource)
 	if err != nil {
 		return nil, err
 	}
+
+	// Response ContentType: Json or xml; json is default.
+	format := "json"
+	if args.Format == "xml" {
+		format = "xml"
+	}
+	// Seems ContentType header is imlemented for all resources, so use querystring.
+	//contentType := fmt.Sprintf("application/%s", format)
+	//args.AddHeader(Header{"Content-Type", contentType})
+	args.GetReqParams["format"] = format
 
 	// Add querystring params.
 	params := url.Values{}
@@ -152,8 +164,6 @@ func (c *Client) buildRequest(args Args) (*CloudSigmaRequest, error) {
 	}
 
 	// Build headers list.
-	// TODO: this should be optionally xml - json is default.
-	args.AddHeader(Header{"Content-Type", "application/json"})
 
 	// Add auth if required.
 	if args.RequiresAuth {

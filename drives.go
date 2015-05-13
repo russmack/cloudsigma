@@ -6,18 +6,19 @@ const (
 
 // Drives
 type Drives struct {
-	Args Args
+	Args *Args
 }
 
 // NewDrives returns a Drives object.
 func NewDrives() *Drives {
 	o := Drives{}
-	o.Args = Args{Resource: EndpointDrives}
+	o.Args = NewArgs()
+	o.Args.Resource = EndpointDrives
 	return &o
 }
 
 // NewGet returns the args required for a Drives GET request.
-func (o *Drives) NewGet() Args {
+func (o *Drives) NewGet() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

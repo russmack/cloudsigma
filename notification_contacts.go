@@ -6,7 +6,7 @@ const (
 
 // NotificationContacts
 type NotificationContacts struct {
-	Args Args
+	Args *Args
 }
 
 // Contact object.
@@ -19,19 +19,20 @@ type Contact struct {
 // NewNotificationContacts returns a NotificationContacts object.
 func NewNotificationContacts() *NotificationContacts {
 	o := NotificationContacts{}
-	o.Args = Args{Resource: EndpointNotificationContacts}
+	o.Args = NewArgs()
+	o.Args.Resource = EndpointNotificationContacts
 	return &o
 }
 
 // NewGet returns the args required for a NotificationContacts GET request.
-func (o *NotificationContacts) NewGet() Args {
+func (o *NotificationContacts) NewGet() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args
 }
 
 // NewSet returns the args required to update a specified notification contact.
-func (o *NotificationContacts) NewSet(contact Contact) Args {
+func (o *NotificationContacts) NewSet(contact Contact) *Args {
 	o.Args.Verb = "PUT"
 	o.Args.RequiresAuth = true
 	o.Args.Body = contact

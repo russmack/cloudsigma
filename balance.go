@@ -6,18 +6,19 @@ const (
 
 // Balance
 type Balance struct {
-	Args Args
+	Args *Args
 }
 
 // NewBalance returns a Balance object.
 func NewBalance() *Balance {
 	o := Balance{}
-	o.Args = Args{Resource: EndpointBalance}
+	o.Args = NewArgs()
+	o.Args.Resource = EndpointBalance
 	return &o
 }
 
 // NewGet returns the args required for a Balance GET request.
-func (o *Balance) NewGet() Args {
+func (o *Balance) NewGet() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args
