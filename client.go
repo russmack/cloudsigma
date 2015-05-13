@@ -70,7 +70,7 @@ func NewClient() *Client {
 // buildBaseUrl returns the url on which all requests are built.
 func (c *Client) buildBaseUrl(location string) (string, error) {
 	if location == "" {
-		return "", errors.New("Location cannot be empty.")
+		return "", errors.New("Service location not set.  Use command: set config location")
 	}
 	apiEndpoint := fmt.Sprintf(ApiEndpoint, location)
 	return fmt.Sprintf(BaseUrl, apiEndpoint, ApiVersion), nil
