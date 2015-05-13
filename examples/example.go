@@ -22,6 +22,7 @@ func main() {
 	calls := map[string]func(string, string, string) []byte{
 		"ApiUrls":                    getApiUrls,
 		"CloudStatus":                getCloudStatus,
+		"CloudStatusXML":             getCloudStatusXml,
 		"Locations":                  getLocations,
 		"Capbilites":                 getCapabilities,
 		"CurrentUsage":               getCurrentUsage,
@@ -36,8 +37,9 @@ func main() {
 	}
 
 	for k, v := range calls {
+		fmt.Println("\nRequesting " + k + "...")
 		resp := v(location, username, password)
-		fmt.Println("Response (" + k + ") :")
+		fmt.Println("Response from " + k + ":\n")
 		fmt.Println(string(resp) + "\n")
 	}
 }
@@ -65,6 +67,25 @@ func getCloudStatus(location string, username string, password string) []byte {
 	args.Username = username
 	args.Password = password
 	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+
+func getCloudStatusXml(location string, username string, password string) []byte {
+	// Create a CloudStatus.
+	o := cloudsigma.NewCloudStatus()
+	args := o.NewGet()
+	args.Username = username
+	args.Password = password
+	args.Location = location
+	args.Format = "xml"
 
 	// Create a client.
 	client := &cloudsigma.Client{}
