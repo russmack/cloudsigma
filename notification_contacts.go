@@ -31,10 +31,27 @@ func (o *NotificationContacts) NewGet() *Args {
 	return o.Args
 }
 
+// NewAdd returns the args required to create a specified notification contact.
+func (o *NotificationContacts) NewAdd(contact Contact) *Args {
+	o.Args.Verb = "POST"
+	o.Args.RequiresAuth = true
+	o.Args.Body = contact
+	return o.Args
+}
+
 // NewEdit returns the args required to update a specified notification contact.
-func (o *NotificationContacts) NewEdit(contact Contact) *Args {
+func (o *NotificationContacts) NewEdit(objectId string, contact Contact) *Args {
 	o.Args.Verb = "PUT"
 	o.Args.RequiresAuth = true
 	o.Args.Body = contact
+	o.Args.ObjectId = objectId
+	return o.Args
+}
+
+// NewDelete returns the args required to delete a specified notification contact.
+func (o *NotificationContacts) NewDelete(objectId string) *Args {
+	o.Args.Verb = "DELETE"
+	o.Args.RequiresAuth = true
+	o.Args.ObjectId = objectId
 	return o.Args
 }
