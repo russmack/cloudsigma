@@ -31,8 +31,8 @@ func (o *NotificationContacts) NewGet() *Args {
 	return o.Args
 }
 
-// NewSet returns the args required to update a specified notification contact.
-func (o *NotificationContacts) NewSet(contact Contact) *Args {
+// NewEdit returns the args required to update a specified notification contact.
+func (o *NotificationContacts) NewEdit(contact Contact) *Args {
 	o.Args.Verb = "PUT"
 	o.Args.RequiresAuth = true
 	o.Args.Body = contact

@@ -20,20 +20,20 @@ func main() {
 	location := "zrh"
 
 	calls := map[string]func(string, string, string) []byte{
-		"ApiUrls":                    getApiUrls,
-		"CloudStatus":                getCloudStatus,
-		"CloudStatusXML":             getCloudStatusXml,
-		"Locations":                  getLocations,
-		"Capbilites":                 getCapabilities,
-		"CurrentUsage":               getCurrentUsage,
-		"Usage":                      getUsage,
-		"Servers":                    getServers,
-		"Drives":                     getDrives,
-		"Balance":                    getBalance,
-		"Subscriptions":              getSubscriptions,
-		"NotificationContacts":       getNotificationContacts,
-		"GetNotificationPreferences": getNotificationPreferences,
-		"SetNotificationPreferences": setNotificationPreference,
+		"ApiUrls":                     getApiUrls,
+		"CloudStatus":                 getCloudStatus,
+		"CloudStatusXML":              getCloudStatusXml,
+		"Locations":                   getLocations,
+		"Capbilites":                  getCapabilities,
+		"CurrentUsage":                getCurrentUsage,
+		"Usage":                       getUsage,
+		"Servers":                     getServers,
+		"Drives":                      getDrives,
+		"Balance":                     getBalance,
+		"Subscriptions":               getSubscriptions,
+		"NotificationContacts":        getNotificationContacts,
+		"GetNotificationPreferences":  getNotificationPreferences,
+		"EditNotificationPreferences": editNotificationPreference,
 	}
 
 	for k, v := range calls {
@@ -277,7 +277,7 @@ func getNotificationPreferences(location string, username string, password strin
 	return resp
 }
 
-func setNotificationPreference(location string, username string, password string) []byte {
+func editNotificationPreference(location string, username string, password string) []byte {
 	// Create the object to post as body.
 	p := cloudsigma.Preference{
 		Contact: "/api/2.0/notification_contacts/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/",
@@ -288,7 +288,7 @@ func setNotificationPreference(location string, username string, password string
 
 	// Create a NotificationPreferences
 	o := cloudsigma.NewNotificationPreferences()
-	args := o.NewSet(p)
+	args := o.NewEdit(p)
 	args.Username = username
 	args.Password = password
 	args.Location = location

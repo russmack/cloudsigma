@@ -33,8 +33,8 @@ func (o *NotificationPreferences) NewGet() *Args {
 	return o.Args
 }
 
-// NewSet returns the args required to update a specified notification preference.
-func (o *NotificationPreferences) NewSet(pref Preference) *Args {
+// NewEdit returns the args required to update a specified notification preference.
+func (o *NotificationPreferences) NewEdit(pref Preference) *Args {
 	o.Args.Verb = "PUT"
 	o.Args.RequiresAuth = true
 	o.Args.Body = pref
