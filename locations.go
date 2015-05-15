@@ -16,8 +16,8 @@ func NewLocations() *Locations {
 	return &o
 }
 
-// NewGet returns the args required for a Locations GET request.
-func (o *Locations) NewGet() *Args {
+// List returns the args required for a Locations GET request.
+func (o *Locations) List() *Args {
 	o.Args.Verb = "GET"
 	//o.Args.RequiresAuth = true
 	return o.Args

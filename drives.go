@@ -17,8 +17,8 @@ func NewDrives() *Drives {
 	return &o
 }
 
-// NewGet returns the args required for a Drives GET request.
-func (o *Drives) NewGet() *Args {
+// List returns the args required for a Drives GET request.
+func (o *Drives) List() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

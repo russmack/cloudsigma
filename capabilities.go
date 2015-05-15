@@ -16,8 +16,8 @@ func NewCapabilities() *Capabilities {
 	return &o
 }
 
-// NewGet returns the args required for a Capabilities GET request.
-func (o *Capabilities) NewGet() *Args {
+// List returns the args required for a Capabilities GET request.
+func (o *Capabilities) List() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

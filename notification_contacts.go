@@ -24,23 +24,23 @@ func NewNotificationContacts() *NotificationContacts {
 	return &o
 }
 
-// NewGet returns the args required for a NotificationContacts GET request.
-func (o *NotificationContacts) NewGet() *Args {
+// List returns the args required for a NotificationContacts GET request.
+func (o *NotificationContacts) List() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args
 }
 
-// NewAdd returns the args required to create a specified notification contact.
-func (o *NotificationContacts) NewAdd(contact Contact) *Args {
+// Create returns the args required to create a specified notification contact.
+func (o *NotificationContacts) Create(contact Contact) *Args {
 	o.Args.Verb = "POST"
 	o.Args.RequiresAuth = true
 	o.Args.Body = contact
 	return o.Args
 }
 
-// NewEdit returns the args required to update a specified notification contact.
-func (o *NotificationContacts) NewEdit(objectId string, contact Contact) *Args {
+// Edit returns the args required to update a specified notification contact.
+func (o *NotificationContacts) Edit(objectId string, contact Contact) *Args {
 	o.Args.Verb = "PUT"
 	o.Args.RequiresAuth = true
 	o.Args.Body = contact
@@ -48,8 +48,8 @@ func (o *NotificationContacts) NewEdit(objectId string, contact Contact) *Args {
 	return o.Args
 }
 
-// NewDelete returns the args required to delete a specified notification contact.
-func (o *NotificationContacts) NewDelete(objectId string) *Args {
+// Delete returns the args required to delete a specified notification contact.
+func (o *NotificationContacts) Delete(objectId string) *Args {
 	o.Args.Verb = "DELETE"
 	o.Args.RequiresAuth = true
 	o.Args.ObjectId = objectId

@@ -178,6 +178,9 @@ func (c *Client) buildRequest(args *Args) (*CloudSigmaRequest, error) {
 // sendRequest sends the given http CloudSigmaRequest and returns the result.
 func (c *Client) sendRequest(req *CloudSigmaRequest) ([]byte, error) {
 	client := http.Client{}
+	//req.Close = true
+	//req.Header.Set("Connection", "close")
+	req.Header.Add("Accept-Encoding", "identity")
 	resp, err := client.Do(req.Request)
 	if err != nil {
 		log.Println("Error in client.Do.")

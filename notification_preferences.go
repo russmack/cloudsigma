@@ -26,15 +26,15 @@ func NewNotificationPreferences() *NotificationPreferences {
 	return &o
 }
 
-// NewGet returns the args required to get all notification preferences.
-func (o *NotificationPreferences) NewGet() *Args {
+// List returns the args required to get all notification preferences.
+func (o *NotificationPreferences) List() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args
 }
 
-// NewEdit returns the args required to update a specified notification preference.
-func (o *NotificationPreferences) NewEdit(pref Preference) *Args {
+// Edit returns the args required to update a specified notification preference.
+func (o *NotificationPreferences) Edit(pref Preference) *Args {
 	o.Args.Verb = "PUT"
 	o.Args.RequiresAuth = true
 	o.Args.Body = pref

@@ -18,8 +18,8 @@ func NewCloudStatus() *CloudStatus {
 	return &o
 }
 
-// NewGet returns the args required for a CloudStatus GET request.
-func (o *CloudStatus) NewGet() *Args {
+// List returns the args required for a CloudStatus GET request.
+func (o *CloudStatus) List() *Args {
 	o.Args.Verb = "GET"
 	//o.Args.RequiresAuth = true
 	return o.Args

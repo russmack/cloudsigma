@@ -17,8 +17,8 @@ func NewServers() *Servers {
 	return &o
 }
 
-// NewGet returns the args required for a Servers GET request.
-func (o *Servers) NewGet() *Args {
+// List returns the args required for a Servers GET request.
+func (o *Servers) List() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

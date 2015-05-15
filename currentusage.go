@@ -17,8 +17,8 @@ func NewCurrentUsage() *CurrentUsage {
 	return &o
 }
 
-// NewGet returns the args required for a CurrentUsage GET request.
-func (o *CurrentUsage) NewGet() *Args {
+// List returns the args required for a CurrentUsage GET request.
+func (o *CurrentUsage) List() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

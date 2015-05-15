@@ -9,7 +9,7 @@ type ApiUrls struct {
 	Args *Args
 }
 
-// NewApiUrls returns a ApiUrls object.
+// NewApiUrls returns an ApiUrls object.
 func NewApiUrls() *ApiUrls {
 	o := ApiUrls{}
 	o.Args = NewArgs()
@@ -17,8 +17,8 @@ func NewApiUrls() *ApiUrls {
 	return &o
 }
 
-// NewGet returns the args required for a ApiUrls GET request.
-func (o *ApiUrls) NewGet() *Args {
+// List returns the args required for an ApiUrls GET request.
+func (o *ApiUrls) List() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = false
 	return o.Args
