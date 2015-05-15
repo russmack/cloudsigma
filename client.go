@@ -95,6 +95,10 @@ func (c *Client) buildResourceUrl(location string, resource string) (*url.URL, e
 	return newUrl, nil
 }
 
+func (a *Args) AddHeaderPair(name string, value string) {
+	a.Headers = append(a.Headers, Header{name, value})
+}
+
 // AddHeader adds a header to the Headers field of an Args object.
 func (a *Args) AddHeader(header Header) {
 	a.Headers = append(a.Headers, header)
@@ -128,14 +132,19 @@ func (c *Client) buildRequest(args *Args) (*CloudSigmaRequest, error) {
 	}
 
 	// Response ContentType: Json or xml; json is default.
-	format := "json"
-	if args.Format == "xml" {
-		format = "xml"
+	// Only for GETs, add format querystring paramater.
+	if strings.ToLower(args.Verb) == "GET" {
+		format := "json"
+		if args.Format == "xml" {
+			format = "xml"
+		}
+		args.GetReqParams["format"] = format
 	}
-	// Seems ContentType header is imlemented for all resources, so use querystring.
+
+	// TODO: maybe should add header content-type application/json to
+	// all POSTs and PUTs ?
 	//contentType := fmt.Sprintf("application/%s", format)
 	//args.AddHeader(Header{"Content-Type", contentType})
-	args.GetReqParams["format"] = format
 
 	// Add querystring params.
 	params := url.Values{}
@@ -163,8 +172,6 @@ func (c *Client) buildRequest(args *Args) (*CloudSigmaRequest, error) {
 		return nil, err
 	}
 
-	// Build headers list.
-
 	// Add auth if required.
 	if args.RequiresAuth {
 		args.AddHeader(c.GetHttpBasicAuthHeader(args.Username, args.Password))
@@ -189,7 +196,7 @@ func (c *Client) sendRequest(req *CloudSigmaRequest) ([]byte, error) {
 	}
 	defer resp.Body.Close()
 	// TODO: improve this.
-	if resp.StatusCode != 200 {
+	if !strings.HasPrefix(string(resp.StatusCode), "2") {
 		return []byte{}, errors.New(resp.Status)
 	}
 	body, err := ioutil.ReadAll(resp.Body)
