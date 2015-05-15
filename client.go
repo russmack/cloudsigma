@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -196,7 +197,7 @@ func (c *Client) sendRequest(req *CloudSigmaRequest) ([]byte, error) {
 	}
 	defer resp.Body.Close()
 	// TODO: improve this.
-	if !strings.HasPrefix(string(resp.StatusCode), "2") {
+	if !strings.HasPrefix(strconv.Itoa(resp.StatusCode), "2") {
 		return []byte{}, errors.New(resp.Status)
 	}
 	body, err := ioutil.ReadAll(resp.Body)
