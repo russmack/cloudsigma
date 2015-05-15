@@ -9,11 +9,21 @@ type NotificationContacts struct {
 	Args *Args
 }
 
-// Contact object.
-type Contact struct {
+// Contact Request object, has writable fields.
+type ContactRequest struct {
 	Email string `json:"email"`
 	Name  string `json:"name"`
 	Phone string `json:"phone"`
+}
+
+// Contact Response object, includes read-only fields.
+type ContactResponse struct {
+	Uuid        string `json:"uuid"`
+	Main        bool   `json:"main"`
+	ResourceUri string `json:"resource_uri"`
+	Email       string `json:"email"`
+	Name        string `json:"name"`
+	Phone       string `json:"phone"`
 }
 
 // NewNotificationContacts returns a NotificationContacts object.
@@ -32,15 +42,19 @@ func (o *NotificationContacts) List() *Args {
 }
 
 // Create returns the args required to create a specified notification contact.
-func (o *NotificationContacts) Create(contact Contact) *Args {
+func (o *NotificationContacts) Create(contacts []ContactRequest) *Args {
 	o.Args.Verb = "POST"
 	o.Args.RequiresAuth = true
-	o.Args.Body = contact
+	o.Args.AddHeaderPair("Content-Type", "application/json")
+	body := struct {
+		Objects []ContactRequest `json:"objects"`
+	}{contacts}
+	o.Args.Body = body
 	return o.Args
 }
 
 // Edit returns the args required to update a specified notification contact.
-func (o *NotificationContacts) Edit(objectId string, contact Contact) *Args {
+func (o *NotificationContacts) Edit(objectId string, contact ContactRequest) *Args {
 	o.Args.Verb = "PUT"
 	o.Args.RequiresAuth = true
 	o.Args.Body = contact
