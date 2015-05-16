@@ -132,6 +132,14 @@ func (c *Client) buildRequest(args *Args) (*CloudSigmaRequest, error) {
 		return nil, err
 	}
 
+	// Add object id to path, if provided.
+	if args.ObjectId != "" {
+		u, err = url.Parse(u.String() + args.ObjectId + "/")
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	// Response ContentType: Json or xml; json is default.
 	// Only for GETs, add format querystring paramater.
 	if strings.ToLower(args.Verb) == "GET" {
