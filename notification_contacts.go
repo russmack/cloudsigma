@@ -57,8 +57,9 @@ func (o *NotificationContacts) Create(contacts []ContactRequest) *Args {
 func (o *NotificationContacts) Edit(objectId string, contact ContactRequest) *Args {
 	o.Args.Verb = "PUT"
 	o.Args.RequiresAuth = true
-	o.Args.Body = contact
+	o.Args.AddHeaderPair("Content-Type", "application/json")
 	o.Args.ObjectId = objectId
+	o.Args.Body = contact
 	return o.Args
 }
 
