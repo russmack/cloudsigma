@@ -26,13 +26,21 @@ func main() {
 		"Locations":                   getLocations,
 		"Capbilites":                  getCapabilities,
 		"CurrentUsage":                getCurrentUsage,
+		"BurstUsage":                  getBurstUsage,
+		"DailyBurstUsage":             getDailyBurstUsage,
 		"Usage":                       getUsage,
 		"Servers":                     getServers,
 		"Drives":                      getDrives,
+		"Snapshots":                   getSnapshots,
+		"Vlans":                       getVlans,
+		"Ips":                         getIps,
+		"Acls":                        getAcls,
+		"Profile":                     getProfile,
 		"Balance":                     getBalance,
 		"Pricing":                     getPricing,
 		"Discounts":                   getDiscounts,
 		"Transactions":                getTransactions,
+		"Licenses":                    getLicenses,
 		"Subscriptions":               getSubscriptions,
 		"NotificationContacts":        getNotificationContacts,
 		"GetNotificationPreferences":  getNotificationPreferences,
@@ -157,6 +165,40 @@ func getCurrentUsage(location string, username string, password string) []byte {
 	}
 	return resp
 }
+func getBurstUsage(location string, username string, password string) []byte {
+	// Create a BurstUsage.
+	o := cloudsigma.NewBurstUsage()
+	args := o.List()
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getDailyBurstUsage(location string, username string, password string) []byte {
+	// Create a DailyBurstUsage.
+	o := cloudsigma.NewDailyBurstUsage()
+	args := o.List()
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
 
 func getUsage(location string, username string, password string) []byte {
 	// Create a Usage.
@@ -213,9 +255,94 @@ func getDrives(location string, username string, password string) []byte {
 	}
 	return resp
 }
+func getSnapshots(location string, username string, password string) []byte {
+	// Create a Snapshots.
+	o := cloudsigma.NewSnapshots()
+	args := o.List()
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getVlans(location string, username string, password string) []byte {
+	// Create a Vlans.
+	o := cloudsigma.NewVlans()
+	args := o.List()
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getIps(location string, username string, password string) []byte {
+	// Create an Ips.
+	o := cloudsigma.NewIps()
+	args := o.List()
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getAcls(location string, username string, password string) []byte {
+	// Create an Acls.
+	o := cloudsigma.NewAcls()
+	args := o.List()
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
 
 // Billing
 
+func getProfile(location string, username string, password string) []byte {
+	// Create a Profile.
+	o := cloudsigma.NewProfile()
+	args := o.List()
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
 func getBalance(location string, username string, password string) []byte {
 	// Create a Balance.
 	o := cloudsigma.NewBalance()
@@ -301,6 +428,23 @@ func getSubscriptions(location string, username string, password string) []byte 
 	}
 	return resp
 }
+func getLicenses(location string, username string, password string) []byte {
+	// Create a Licenses.
+	o := cloudsigma.NewLicenses()
+	args := o.List()
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
 
 // Notifications
 
@@ -360,7 +504,7 @@ func editNotificationPreference(location string, username string, password strin
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(args)
 	if err != nil {
-		fmt.Println("Error calling client.", err)
+		fmt.Println("Error, but only because this demo has an invalid contact id.", err)
 		return []byte{}
 	}
 	return resp
