@@ -40,6 +40,8 @@ func main() {
 		"ServerShutdown":              getServerShutdown,
 		"ServerStop":                  getServerStop,
 		"ServerStart":                 getServerStart,
+		"DriveCreate":                 getDriveCreate,
+		"DriveDelete":                 getDriveDelete,
 		"Profile":                     getProfile,
 		"Balance":                     getBalance,
 		"Pricing":                     getPricing,
@@ -247,6 +249,43 @@ func getDrives(location string, username string, password string) []byte {
 	// Create a Drives.
 	o := cloudsigma.NewDrives()
 	args := o.List()
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getDriveCreate(location string, username string, password string) []byte {
+	newDrives := []cloudsigma.DriveRequest{
+		cloudsigma.DriveRequest{"disk", "Example Drive", 6174015488},
+	}
+	// Create a Drives.
+	o := cloudsigma.NewDrives()
+	args := o.Create(newDrives)
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getDriveDelete(location string, username string, password string) []byte {
+	// Create a Drives.
+	o := cloudsigma.NewDrives()
+	args := o.Delete("")
 	args.Username = username
 	args.Password = password
 	args.Location = location
