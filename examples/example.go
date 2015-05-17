@@ -35,6 +35,9 @@ func main() {
 		"Vlans":                       getVlans,
 		"Ips":                         getIps,
 		"Acls":                        getAcls,
+		"Shutdown":                    getShutdown,
+		"Stop":                        getStop,
+		"Start":                       getStart,
 		"Profile":                     getProfile,
 		"Balance":                     getBalance,
 		"Pricing":                     getPricing,
@@ -313,6 +316,60 @@ func getAcls(location string, username string, password string) []byte {
 	args.Username = username
 	args.Password = password
 	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getStart(location string, username string, password string) []byte {
+	// Create an Servers.
+	o := cloudsigma.NewServers()
+	args := o.Start("d7a34699-6985-449a-a80b-7e76d6b36947")
+	args.Username = username
+	args.Password = password
+	args.Location = location
+	args.ActionName = "start"
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getStop(location string, username string, password string) []byte {
+	// Create an Servers.
+	o := cloudsigma.NewServers()
+	args := o.Stop("d7a34699-6985-449a-a80b-7e76d6b36947")
+	args.Username = username
+	args.Password = password
+	args.Location = location
+	args.ActionName = "stop"
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getShutdown(location string, username string, password string) []byte {
+	// Create an Servers.
+	o := cloudsigma.NewServers()
+	args := o.Shutdown("d7a34699-6985-449a-a80b-7e76d6b36947")
+	args.Username = username
+	args.Password = password
+	args.Location = location
+	args.ActionName = "shutdown"
 
 	// Create a client.
 	client := &cloudsigma.Client{}

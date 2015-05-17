@@ -59,3 +59,30 @@ func (o *Servers) Delete(objectId string) *Args {
 	o.Args.ObjectId = objectId
 	return o.Args
 }
+
+// Start returns the args required to start a server.
+func (o *Servers) Start(objectId string) *Args {
+	o.Args.Verb = "POST"
+	o.Args.RequiresAuth = true
+	o.Args.ObjectId = objectId
+	o.Args.ActionName = "start"
+	return o.Args
+}
+
+// Stop returns the args required to stop a server.
+func (o *Servers) Stop(objectId string) *Args {
+	o.Args.Verb = "POST"
+	o.Args.RequiresAuth = true
+	o.Args.ObjectId = objectId
+	o.Args.ActionName = "stop"
+	return o.Args
+}
+
+// Shutdown returns the args required to shutdown a server.
+func (o *Servers) Shutdown(objectId string) *Args {
+	o.Args.Verb = "POST"
+	o.Args.RequiresAuth = true
+	o.Args.ObjectId = objectId
+	o.Args.ActionName = "shutdown"
+	return o.Args
+}
