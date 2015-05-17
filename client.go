@@ -54,7 +54,8 @@ const (
 	ApiVersion      = "2.0"
 	UrlResourceList = "%s/"
 	UrlResource     = "%s/%s"
-	UrlAction       = "%s/%s/action/?do=%s"
+	//UrlAction       = "action/?do=%s"
+	UrlAction = "action/"
 )
 
 // NewArgs returns an Args object.
@@ -142,7 +143,7 @@ func (c *Client) buildRequest(args *Args) (*CloudSigmaRequest, error) {
 
 	// Response ContentType: Json or xml; json is default.
 	// Only for GETs, add format querystring paramater.
-	if strings.ToLower(args.Verb) == "GET" {
+	if strings.ToUpper(args.Verb) == "GET" {
 		format := "json"
 		if args.Format == "xml" {
 			format = "xml"
@@ -155,8 +156,17 @@ func (c *Client) buildRequest(args *Args) (*CloudSigmaRequest, error) {
 	//contentType := fmt.Sprintf("application/%s", format)
 	//args.AddHeader(Header{"Content-Type", contentType})
 
-	// Add querystring params.
+	// Add the action path and do querystring parameter if provided.
 	params := url.Values{}
+	if args.ActionName != "" {
+		u, err = url.Parse(u.String() + UrlAction)
+		if err != nil {
+			return nil, err
+		}
+		params.Add("do", args.ActionName)
+	}
+
+	// Add querystring params.
 	for k, v := range args.GetReqParams {
 		params.Add(k, v)
 	}
