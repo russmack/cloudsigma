@@ -35,9 +35,11 @@ func main() {
 		"Vlans":                       getVlans,
 		"Ips":                         getIps,
 		"Acls":                        getAcls,
-		"Shutdown":                    getShutdown,
-		"Stop":                        getStop,
-		"Start":                       getStart,
+		"ServerCreate":                getServerCreate,
+		"ServerDelete":                getServerDelete,
+		"ServerShutdown":              getServerShutdown,
+		"ServerStop":                  getServerStop,
+		"ServerStart":                 getServerStart,
 		"Profile":                     getProfile,
 		"Balance":                     getBalance,
 		"Pricing":                     getPricing,
@@ -326,10 +328,47 @@ func getAcls(location string, username string, password string) []byte {
 	}
 	return resp
 }
-func getStart(location string, username string, password string) []byte {
-	// Create an Servers.
+func getServerCreate(location string, username string, password string) []byte {
+	newServers := []cloudsigma.ServerRequest{
+		cloudsigma.ServerRequest{"Example Server", 1000, 536870912, "vncP455word"},
+	}
+	// Create a Servers.
 	o := cloudsigma.NewServers()
-	args := o.Start("d7a34699-6985-449a-a80b-7e76d6b36947")
+	args := o.Create(newServers)
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getServerDelete(location string, username string, password string) []byte {
+	// Create a Servers.
+	o := cloudsigma.NewServers()
+	args := o.Delete("")
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	resp, err := client.Call(args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getServerStart(location string, username string, password string) []byte {
+	// Create a Servers.
+	o := cloudsigma.NewServers()
+	args := o.Start("")
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -344,10 +383,10 @@ func getStart(location string, username string, password string) []byte {
 	}
 	return resp
 }
-func getStop(location string, username string, password string) []byte {
-	// Create an Servers.
+func getServerStop(location string, username string, password string) []byte {
+	// Create a Servers.
 	o := cloudsigma.NewServers()
-	args := o.Stop("d7a34699-6985-449a-a80b-7e76d6b36947")
+	args := o.Stop("")
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -362,10 +401,10 @@ func getStop(location string, username string, password string) []byte {
 	}
 	return resp
 }
-func getShutdown(location string, username string, password string) []byte {
-	// Create an Servers.
+func getServerShutdown(location string, username string, password string) []byte {
+	// Create a Servers.
 	o := cloudsigma.NewServers()
-	args := o.Shutdown("d7a34699-6985-449a-a80b-7e76d6b36947")
+	args := o.Shutdown("")
 	args.Username = username
 	args.Password = password
 	args.Location = location
