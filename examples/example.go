@@ -457,7 +457,6 @@ func getServerStart(location string, username string, password string) []byte {
 	args.Username = username
 	args.Password = password
 	args.Location = location
-	args.ActionName = "start"
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -479,7 +478,6 @@ func getServerStop(location string, username string, password string) []byte {
 	args.Username = username
 	args.Password = password
 	args.Location = location
-	args.ActionName = "stop"
 
 	// Create a client.
 	client := &cloudsigma.Client{}
@@ -501,7 +499,6 @@ func getServerShutdown(location string, username string, password string) []byte
 	args.Username = username
 	args.Password = password
 	args.Location = location
-	args.ActionName = "shutdown"
 
 	// Create a client.
 	client := &cloudsigma.Client{}
