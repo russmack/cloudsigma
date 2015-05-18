@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/russmack/cloudsigma"
 	"os"
+	"strconv"
 )
 
 func main() {
@@ -369,7 +370,13 @@ func getAcls(location string, username string, password string) []byte {
 }
 func getServerCreate(location string, username string, password string) []byte {
 	newServers := []cloudsigma.ServerRequest{
-		cloudsigma.ServerRequest{"Example Server", 1000, 536870912, "vncP455word"},
+		cloudsigma.ServerRequest{"Example Server 0", 1000, 536870912, "vncP455word"},
+	}
+	// Add a few more.
+	for i := 1; i <= 3; i++ {
+		newServers = append(newServers,
+			cloudsigma.ServerRequest{
+				"Example Server " + strconv.Itoa(i), 1000, 536870912, "vncP455word"})
 	}
 	// Create a Servers.
 	o := cloudsigma.NewServers()
