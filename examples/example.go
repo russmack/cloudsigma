@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/russmack/cloudsigma"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -60,6 +62,23 @@ func main() {
 		resp := v(location, username, password)
 		fmt.Println("Response from " + k + ":\n")
 		fmt.Println(string(resp) + "\n")
+	}
+}
+
+// confirmProceed provides an opportunity for the user to avoid write operations.
+func confirmProceed() bool {
+	fmt.Println("Are you sure you want to do this? ( y/n )")
+	in := bufio.NewReader(os.Stdin)
+	answer, err := in.ReadString('\n')
+	if err != nil {
+		fmt.Println("Error reading confirmation.", err)
+		os.Exit(1)
+	}
+	answer = strings.Trim(answer, "\t \r\n")
+	if answer == "y" {
+		return true
+	} else {
+		return false
 	}
 }
 
@@ -264,6 +283,10 @@ func getDrives(location string, username string, password string) []byte {
 	return resp
 }
 func getDriveCreate(location string, username string, password string) []byte {
+	if !confirmProceed() {
+		return []byte("Skipping.")
+	}
+
 	newDrives := []cloudsigma.DriveRequest{
 		cloudsigma.DriveRequest{"disk", "Example Drive", 6174015488},
 	}
@@ -284,6 +307,10 @@ func getDriveCreate(location string, username string, password string) []byte {
 	return resp
 }
 func getDriveDelete(location string, username string, password string) []byte {
+	if !confirmProceed() {
+		return []byte("Skipping.")
+	}
+
 	// Create a Drives.
 	o := cloudsigma.NewDrives()
 	args := o.Delete("")
@@ -369,6 +396,10 @@ func getAcls(location string, username string, password string) []byte {
 	return resp
 }
 func getServerCreate(location string, username string, password string) []byte {
+	if !confirmProceed() {
+		return []byte("Skipping.")
+	}
+
 	newServers := []cloudsigma.ServerRequest{
 		cloudsigma.ServerRequest{"Example Server 0", 1000, 536870912, "vncP455word"},
 	}
@@ -395,6 +426,10 @@ func getServerCreate(location string, username string, password string) []byte {
 	return resp
 }
 func getServerDelete(location string, username string, password string) []byte {
+	if !confirmProceed() {
+		return []byte("Skipping.")
+	}
+
 	// Create a Servers.
 	o := cloudsigma.NewServers()
 	args := o.Delete("")
@@ -412,6 +447,10 @@ func getServerDelete(location string, username string, password string) []byte {
 	return resp
 }
 func getServerStart(location string, username string, password string) []byte {
+	if !confirmProceed() {
+		return []byte("Skipping.")
+	}
+
 	// Create a Servers.
 	o := cloudsigma.NewServers()
 	args := o.Start("")
@@ -430,6 +469,10 @@ func getServerStart(location string, username string, password string) []byte {
 	return resp
 }
 func getServerStop(location string, username string, password string) []byte {
+	if !confirmProceed() {
+		return []byte("Skipping.")
+	}
+
 	// Create a Servers.
 	o := cloudsigma.NewServers()
 	args := o.Stop("")
@@ -448,6 +491,10 @@ func getServerStop(location string, username string, password string) []byte {
 	return resp
 }
 func getServerShutdown(location string, username string, password string) []byte {
+	if !confirmProceed() {
+		return []byte("Skipping.")
+	}
+
 	// Create a Servers.
 	o := cloudsigma.NewServers()
 	args := o.Shutdown("")
@@ -627,6 +674,10 @@ func getNotificationPreferences(location string, username string, password strin
 }
 
 func editNotificationPreference(location string, username string, password string) []byte {
+	if !confirmProceed() {
+		return []byte("Skipping.")
+	}
+
 	// Create the object to post as body.
 	p := cloudsigma.Preference{
 		Contact: "/api/2.0/notification_contacts/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/",
