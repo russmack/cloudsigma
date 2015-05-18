@@ -17,8 +17,8 @@ func NewTransactions() *Transactions {
 	return &o
 }
 
-// List returns the args required for a Transactions GET request.
-func (o *Transactions) List() *Args {
+// NewList returns the args required for a Transactions GET request.
+func (o *Transactions) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

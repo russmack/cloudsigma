@@ -17,8 +17,8 @@ func NewSnapshots() *Snapshots {
 	return &o
 }
 
-// List returns the args required for a Snapshots GET request.
-func (o *Snapshots) List() *Args {
+// NewList returns the args required for a Snapshots GET request.
+func (o *Snapshots) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

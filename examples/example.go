@@ -85,7 +85,7 @@ func confirmProceed() bool {
 func getApiUrls(location string, username string, password string) []byte {
 	// Create an ApiUrls.
 	o := cloudsigma.NewApiUrls()
-	args := o.List()
+	args := o.NewList()
 	args.Location = location
 
 	// Create a client.
@@ -103,7 +103,7 @@ func getApiUrls(location string, username string, password string) []byte {
 func getCloudStatus(location string, username string, password string) []byte {
 	// Create a CloudStatus.
 	o := cloudsigma.NewCloudStatus()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -121,7 +121,7 @@ func getCloudStatus(location string, username string, password string) []byte {
 func getCloudStatusXml(location string, username string, password string) []byte {
 	// Create a CloudStatus.
 	o := cloudsigma.NewCloudStatus()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -140,7 +140,7 @@ func getCloudStatusXml(location string, username string, password string) []byte
 func getLocations(location string, username string, password string) []byte {
 	// Create a Locations.
 	o := cloudsigma.NewLocations()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -158,7 +158,7 @@ func getLocations(location string, username string, password string) []byte {
 func getCapabilities(location string, username string, password string) []byte {
 	// Create a Capabilities.
 	o := cloudsigma.NewCapabilities()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -178,7 +178,7 @@ func getCapabilities(location string, username string, password string) []byte {
 func getCurrentUsage(location string, username string, password string) []byte {
 	// Create a CurrentUsage.
 	o := cloudsigma.NewCurrentUsage()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -195,7 +195,7 @@ func getCurrentUsage(location string, username string, password string) []byte {
 func getBurstUsage(location string, username string, password string) []byte {
 	// Create a BurstUsage.
 	o := cloudsigma.NewBurstUsage()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -212,7 +212,7 @@ func getBurstUsage(location string, username string, password string) []byte {
 func getDailyBurstUsage(location string, username string, password string) []byte {
 	// Create a DailyBurstUsage.
 	o := cloudsigma.NewDailyBurstUsage()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -230,7 +230,7 @@ func getDailyBurstUsage(location string, username string, password string) []byt
 func getUsage(location string, username string, password string) []byte {
 	// Create a Usage.
 	o := cloudsigma.NewUsage()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -250,7 +250,7 @@ func getUsage(location string, username string, password string) []byte {
 func getServers(location string, username string, password string) []byte {
 	// Create a Servers.
 	o := cloudsigma.NewServers()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -268,7 +268,7 @@ func getServers(location string, username string, password string) []byte {
 func getDrives(location string, username string, password string) []byte {
 	// Create a Drives.
 	o := cloudsigma.NewDrives()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -292,7 +292,7 @@ func getDriveCreate(location string, username string, password string) []byte {
 	}
 	// Create a Drives.
 	o := cloudsigma.NewDrives()
-	args := o.Create(newDrives)
+	args := o.NewCreate(newDrives)
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -313,7 +313,7 @@ func getDriveDelete(location string, username string, password string) []byte {
 
 	// Create a Drives.
 	o := cloudsigma.NewDrives()
-	args := o.Delete("")
+	args := o.NewDelete("")
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -330,7 +330,7 @@ func getDriveDelete(location string, username string, password string) []byte {
 func getSnapshots(location string, username string, password string) []byte {
 	// Create a Snapshots.
 	o := cloudsigma.NewSnapshots()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -347,7 +347,7 @@ func getSnapshots(location string, username string, password string) []byte {
 func getVlans(location string, username string, password string) []byte {
 	// Create a Vlans.
 	o := cloudsigma.NewVlans()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -364,7 +364,7 @@ func getVlans(location string, username string, password string) []byte {
 func getIps(location string, username string, password string) []byte {
 	// Create an Ips.
 	o := cloudsigma.NewIps()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -381,7 +381,7 @@ func getIps(location string, username string, password string) []byte {
 func getAcls(location string, username string, password string) []byte {
 	// Create an Acls.
 	o := cloudsigma.NewAcls()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -411,7 +411,7 @@ func getServerCreate(location string, username string, password string) []byte {
 	}
 	// Create a Servers.
 	o := cloudsigma.NewServers()
-	args := o.Create(newServers)
+	args := o.NewCreate(newServers)
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -432,7 +432,7 @@ func getServerDelete(location string, username string, password string) []byte {
 
 	// Create a Servers.
 	o := cloudsigma.NewServers()
-	args := o.Delete("")
+	args := o.NewDelete("")
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -453,7 +453,7 @@ func getServerStart(location string, username string, password string) []byte {
 
 	// Create a Servers.
 	o := cloudsigma.NewServers()
-	args := o.Start("")
+	args := o.NewStart("")
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -474,7 +474,7 @@ func getServerStop(location string, username string, password string) []byte {
 
 	// Create a Servers.
 	o := cloudsigma.NewServers()
-	args := o.Stop("")
+	args := o.NewStop("")
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -495,7 +495,7 @@ func getServerShutdown(location string, username string, password string) []byte
 
 	// Create a Servers.
 	o := cloudsigma.NewServers()
-	args := o.Shutdown("")
+	args := o.NewShutdown("")
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -515,7 +515,7 @@ func getServerShutdown(location string, username string, password string) []byte
 func getProfile(location string, username string, password string) []byte {
 	// Create a Profile.
 	o := cloudsigma.NewProfile()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -532,7 +532,7 @@ func getProfile(location string, username string, password string) []byte {
 func getBalance(location string, username string, password string) []byte {
 	// Create a Balance.
 	o := cloudsigma.NewBalance()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -549,7 +549,7 @@ func getBalance(location string, username string, password string) []byte {
 func getPricing(location string, username string, password string) []byte {
 	// Create a Pricing.
 	o := cloudsigma.NewPricing()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -566,7 +566,7 @@ func getPricing(location string, username string, password string) []byte {
 func getDiscounts(location string, username string, password string) []byte {
 	// Create a Discounts.
 	o := cloudsigma.NewDiscounts()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -583,7 +583,7 @@ func getDiscounts(location string, username string, password string) []byte {
 func getTransactions(location string, username string, password string) []byte {
 	// Create a Transactions.
 	o := cloudsigma.NewTransactions()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -600,7 +600,7 @@ func getTransactions(location string, username string, password string) []byte {
 func getSubscriptions(location string, username string, password string) []byte {
 	// Create a Subscriptions.
 	o := cloudsigma.NewSubscriptions()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -617,7 +617,7 @@ func getSubscriptions(location string, username string, password string) []byte 
 func getLicenses(location string, username string, password string) []byte {
 	// Create a Licenses.
 	o := cloudsigma.NewLicenses()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -637,7 +637,7 @@ func getLicenses(location string, username string, password string) []byte {
 func getNotificationContacts(location string, username string, password string) []byte {
 	// Create a NotificationContacts
 	o := cloudsigma.NewNotificationContacts()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -655,7 +655,7 @@ func getNotificationContacts(location string, username string, password string) 
 func getNotificationPreferences(location string, username string, password string) []byte {
 	// Create a NotificationPreferences
 	o := cloudsigma.NewNotificationPreferences()
-	args := o.List()
+	args := o.NewList()
 	args.Username = username
 	args.Password = password
 	args.Location = location
@@ -685,7 +685,7 @@ func editNotificationPreference(location string, username string, password strin
 
 	// Create a NotificationPreferences
 	o := cloudsigma.NewNotificationPreferences()
-	args := o.Edit(p)
+	args := o.NewEdit(p)
 	args.Username = username
 	args.Password = password
 	args.Location = location

@@ -17,8 +17,8 @@ func NewDiscounts() *Discounts {
 	return &o
 }
 
-// List returns the args required for a Discounts GET request.
-func (o *Discounts) List() *Args {
+// NewList returns the args required for a Discounts GET request.
+func (o *Discounts) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

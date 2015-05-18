@@ -17,8 +17,8 @@ func NewBalance() *Balance {
 	return &o
 }
 
-// List returns the args required for a Balance GET request.
-func (o *Balance) List() *Args {
+// NewList returns the args required for a Balance GET request.
+func (o *Balance) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

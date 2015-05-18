@@ -23,15 +23,15 @@ func NewServers() *Servers {
 	return &o
 }
 
-// List returns the args required for a Servers GET request.
-func (o *Servers) List() *Args {
+// NewList returns the args required for a Servers GET request.
+func (o *Servers) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args
 }
 
 // Create returns the args required to create a server.
-func (o *Servers) Create(servers []ServerRequest) *Args {
+func (o *Servers) NewCreate(servers []ServerRequest) *Args {
 	o.Args.Verb = "POST"
 	o.Args.RequiresAuth = true
 	o.Args.AddHeaderPair("Content-Type", "application/json")
@@ -43,7 +43,7 @@ func (o *Servers) Create(servers []ServerRequest) *Args {
 }
 
 // Edit returns the args required to update a server.
-func (o *Servers) Edit(objectId string, server ServerRequest) *Args {
+func (o *Servers) NewEdit(objectId string, server ServerRequest) *Args {
 	o.Args.Verb = "PUT"
 	o.Args.RequiresAuth = true
 	o.Args.AddHeaderPair("Content-Type", "application/json")
@@ -53,7 +53,7 @@ func (o *Servers) Edit(objectId string, server ServerRequest) *Args {
 }
 
 // Delete returns the args required to delete a server.
-func (o *Servers) Delete(objectId string) *Args {
+func (o *Servers) NewDelete(objectId string) *Args {
 	o.Args.Verb = "DELETE"
 	o.Args.RequiresAuth = true
 	o.Args.ObjectId = objectId
@@ -61,7 +61,7 @@ func (o *Servers) Delete(objectId string) *Args {
 }
 
 // Start returns the args required to start a server.
-func (o *Servers) Start(objectId string) *Args {
+func (o *Servers) NewStart(objectId string) *Args {
 	o.Args.Verb = "POST"
 	o.Args.RequiresAuth = true
 	o.Args.ObjectId = objectId
@@ -70,7 +70,7 @@ func (o *Servers) Start(objectId string) *Args {
 }
 
 // Stop returns the args required to stop a server.
-func (o *Servers) Stop(objectId string) *Args {
+func (o *Servers) NewStop(objectId string) *Args {
 	o.Args.Verb = "POST"
 	o.Args.RequiresAuth = true
 	o.Args.ObjectId = objectId
@@ -79,7 +79,7 @@ func (o *Servers) Stop(objectId string) *Args {
 }
 
 // Shutdown returns the args required to shutdown a server.
-func (o *Servers) Shutdown(objectId string) *Args {
+func (o *Servers) NewShutdown(objectId string) *Args {
 	o.Args.Verb = "POST"
 	o.Args.RequiresAuth = true
 	o.Args.ObjectId = objectId

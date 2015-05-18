@@ -22,15 +22,15 @@ func NewDrives() *Drives {
 	return &o
 }
 
-// List returns the args required for a Drives GET request.
-func (o *Drives) List() *Args {
+// NewList returns the args required for a Drives GET request.
+func (o *Drives) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args
 }
 
 // Create returns the args required to create a drive.
-func (o *Drives) Create(drives []DriveRequest) *Args {
+func (o *Drives) NewCreate(drives []DriveRequest) *Args {
 	o.Args.Verb = "POST"
 	o.Args.RequiresAuth = true
 	o.Args.AddHeaderPair("Content-Type", "application/json")
@@ -42,7 +42,7 @@ func (o *Drives) Create(drives []DriveRequest) *Args {
 }
 
 // Delete returns the args required to delete a drive.
-func (o *Drives) Delete(objectId string) *Args {
+func (o *Drives) NewDelete(objectId string) *Args {
 	o.Args.Verb = "DELETE"
 	o.Args.RequiresAuth = true
 	o.Args.ObjectId = objectId

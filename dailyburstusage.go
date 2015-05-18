@@ -17,8 +17,8 @@ func NewDailyBurstUsage() *DailyBurstUsage {
 	return &o
 }
 
-// List returns the args required for a DailyBurstUsage GET request.
-func (o *DailyBurstUsage) List() *Args {
+// NewList returns the args required for a DailyBurstUsage GET request.
+func (o *DailyBurstUsage) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

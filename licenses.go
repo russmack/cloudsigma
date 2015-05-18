@@ -17,8 +17,8 @@ func NewLicenses() *Licenses {
 	return &o
 }
 
-// List returns the args required for a Licenses GET request.
-func (o *Licenses) List() *Args {
+// NewList returns the args required for a Licenses GET request.
+func (o *Licenses) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

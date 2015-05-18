@@ -17,8 +17,8 @@ func NewProfile() *Profile {
 	return &o
 }
 
-// List returns the args required for a Profile GET request.
-func (o *Profile) List() *Args {
+// NewList returns the args required for a Profile GET request.
+func (o *Profile) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

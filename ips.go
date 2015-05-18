@@ -17,8 +17,8 @@ func NewIps() *Ips {
 	return &o
 }
 
-// List returns the args required for a Ips GET request.
-func (o *Ips) List() *Args {
+// NewList returns the args required for a Ips GET request.
+func (o *Ips) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

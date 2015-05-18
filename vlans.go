@@ -17,8 +17,8 @@ func NewVlans() *Vlans {
 	return &o
 }
 
-// List returns the args required for a Vlans GET request.
-func (o *Vlans) List() *Args {
+// NewList returns the args required for a Vlans GET request.
+func (o *Vlans) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

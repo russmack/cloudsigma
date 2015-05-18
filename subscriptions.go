@@ -17,8 +17,8 @@ func NewSubscriptions() *Subscriptions {
 	return &o
 }
 
-// List returns the args required for a Subscriptions GET request.
-func (o *Subscriptions) List() *Args {
+// NewList returns the args required for a Subscriptions GET request.
+func (o *Subscriptions) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

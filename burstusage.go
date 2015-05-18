@@ -17,8 +17,8 @@ func NewBurstUsage() *BurstUsage {
 	return &o
 }
 
-// List returns the args required for a BurstUsage GET request.
-func (o *BurstUsage) List() *Args {
+// NewList returns the args required for a BurstUsage GET request.
+func (o *BurstUsage) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

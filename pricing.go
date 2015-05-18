@@ -17,8 +17,8 @@ func NewPricing() *Pricing {
 	return &o
 }
 
-// List returns the args required for a Pricing GET request.
-func (o *Pricing) List() *Args {
+// NewList returns the args required for a Pricing GET request.
+func (o *Pricing) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args

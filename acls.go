@@ -17,8 +17,8 @@ func NewAcls() *Acls {
 	return &o
 }
 
-// List returns the args required for an Acls GET request.
-func (o *Acls) List() *Args {
+// NewList returns the args required for an Acls GET request.
+func (o *Acls) NewList() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	return o.Args
