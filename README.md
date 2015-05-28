@@ -11,9 +11,17 @@ A Golang REST client for CloudSigma IaaS.
 ## Usage
 ```
 Set your login in the examples/config.json.
-Instructions on their way; meanwhile:
 cd examples
 go run example.go
+```
+Api usage:
+```
+c := cloudsigma.NewCloudStatus()
+args := c.NewList()
+args.Location = "zrh"
+args.Format = "xml"
+client := &cloudsigma.Client{}
+resp, err := client.Call(args)
 ```
 See another example at:
 https://github.com/russmack/cloudsigmarepl
