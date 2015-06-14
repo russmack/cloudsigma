@@ -114,12 +114,12 @@ func (r *CloudSigmaRequest) AddHeaders(headers []Header) {
 }
 
 // Call builds and sends a request, given Args, and returns the http result.
-func (c *Client) Call(args *Args) ([]byte, error) {
+func (c *Client) Call(client *http.Client, args *Args) ([]byte, error) {
 	req, err := c.buildRequest(args)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := c.sendRequest(req)
+	resp, err := c.sendRequest(client, req)
 	if err != nil {
 		return nil, err
 	}
@@ -150,11 +150,6 @@ func (c *Client) buildRequest(args *Args) (*CloudSigmaRequest, error) {
 		}
 		args.GetReqParams["format"] = format
 	}
-
-	// TODO: maybe should add header content-type application/json to
-	// all POSTs and PUTs ?
-	//contentType := fmt.Sprintf("application/%s", format)
-	//args.AddHeader(Header{"Content-Type", contentType})
 
 	// Add the action path and do querystring parameter if provided.
 	params := url.Values{}
@@ -202,10 +197,10 @@ func (c *Client) buildRequest(args *Args) (*CloudSigmaRequest, error) {
 }
 
 // sendRequest sends the given http CloudSigmaRequest and returns the result.
-func (c *Client) sendRequest(req *CloudSigmaRequest) ([]byte, error) {
-	client := http.Client{}
-	//req.Close = true
-	//req.Header.Set("Connection", "close")
+func (c *Client) sendRequest(client *http.Client, req *CloudSigmaRequest) ([]byte, error) {
+	if client == nil {
+		client = &http.Client{}
+	}
 	req.Header.Add("Accept-Encoding", "identity")
 	resp, err := client.Do(req.Request)
 	if err != nil {
@@ -214,7 +209,6 @@ func (c *Client) sendRequest(req *CloudSigmaRequest) ([]byte, error) {
 		return []byte{}, err
 	}
 	defer resp.Body.Close()
-	// TODO: improve this.
 	if !strings.HasPrefix(strconv.Itoa(resp.StatusCode), "2") {
 		return []byte{}, errors.New(resp.Status)
 	}

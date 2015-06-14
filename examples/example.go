@@ -90,7 +90,7 @@ func getApiUrls(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -110,7 +110,7 @@ func getCloudStatus(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -129,7 +129,7 @@ func getCloudStatusXml(location string, username string, password string) []byte
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -147,7 +147,7 @@ func getLocations(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -165,7 +165,7 @@ func getCapabilities(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte(err.Error())
@@ -185,7 +185,7 @@ func getCurrentUsage(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -202,7 +202,7 @@ func getBurstUsage(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -219,7 +219,7 @@ func getDailyBurstUsage(location string, username string, password string) []byt
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -237,7 +237,7 @@ func getUsage(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -257,7 +257,7 @@ func getServers(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -275,7 +275,7 @@ func getDrives(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -299,7 +299,7 @@ func getDriveCreate(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -320,7 +320,7 @@ func getDriveDelete(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -337,7 +337,7 @@ func getSnapshots(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -354,7 +354,7 @@ func getVlans(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -371,7 +371,7 @@ func getIps(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -388,7 +388,7 @@ func getAcls(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -418,7 +418,7 @@ func getServerCreate(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -439,7 +439,7 @@ func getServerDelete(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -460,7 +460,7 @@ func getServerStart(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -481,7 +481,7 @@ func getServerStop(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -502,7 +502,7 @@ func getServerShutdown(location string, username string, password string) []byte
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -522,7 +522,7 @@ func getProfile(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -539,7 +539,7 @@ func getBalance(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -556,7 +556,7 @@ func getPricing(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -573,7 +573,7 @@ func getDiscounts(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -590,7 +590,7 @@ func getTransactions(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -607,7 +607,7 @@ func getSubscriptions(location string, username string, password string) []byte 
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -624,7 +624,7 @@ func getLicenses(location string, username string, password string) []byte {
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -644,7 +644,7 @@ func getNotificationContacts(location string, username string, password string) 
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -662,7 +662,7 @@ func getNotificationPreferences(location string, username string, password strin
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}
@@ -692,7 +692,7 @@ func editNotificationPreference(location string, username string, password strin
 
 	// Create a client.
 	client := &cloudsigma.Client{}
-	resp, err := client.Call(args)
+	resp, err := client.Call(nil, args)
 	if err != nil {
 		fmt.Println("Error, but only because this demo has an invalid contact id.", err)
 		return []byte{}
