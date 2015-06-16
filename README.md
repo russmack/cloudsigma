@@ -17,7 +17,7 @@ args := c.NewList()
 args.Location = "zrh"
 args.Format = "xml"
 client := &cloudsigma.Client{}
-resp, err := client.Call(args)
+resp, err := client.Call(nil, args)
 ```
 See another example at:
 https://github.com/russmack/cloudsigmarepl
