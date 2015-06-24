@@ -17,6 +17,14 @@ func NewVlans() *Vlans {
 	return &o
 }
 
+// NewVlansDetailed returns a Vlans object with a VlansDetailed endpoint.
+func NewVlansDetailed() *Vlans {
+	o := Vlans{}
+	o.Args = NewArgs()
+	o.Args.Resource = EndpointVlans + "/detail"
+	return &o
+}
+
 // NewList returns the args required for a Vlans GET request.
 func (o *Vlans) NewList() *Args {
 	o.Args.Verb = "GET"
