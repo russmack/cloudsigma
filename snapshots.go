@@ -8,6 +8,10 @@ const (
 type Snapshots struct {
 	Args *Args
 }
+type SnapshotRequest struct {
+	Drive string `json:"drive"`
+	Name  string `json:"name"`
+}
 
 // NewSnapshots returns a Snapshots object.
 func NewSnapshots() *Snapshots {
