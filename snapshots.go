@@ -27,3 +27,19 @@ func (o *Snapshots) NewList() *Args {
 	o.Args.RequiresAuth = true
 	return o.Args
 }
+
+// NewListDetailed returns the args required for a Snapshots GET request.
+func (o *Snapshots) NewListDetailed() *Args {
+	o.Args.Verb = "GET"
+	o.Args.RequiresAuth = true
+	o.Args.Resource += "/detail"
+	return o.Args
+}
+
+// NewGet returns the args required for a Snapshots GET request.
+func (o *Snapshots) NewGet(uuid string) *Args {
+	o.Args.Verb = "GET"
+	o.Args.RequiresAuth = true
+	o.Args.Resource += "/" + uuid + "/"
+	return o.Args
+}
