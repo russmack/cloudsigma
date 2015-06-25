@@ -29,6 +29,7 @@ func (o *Snapshots) NewList() *Args {
 }
 
 // NewListDetailed returns the args required for a Snapshots GET request.
+// TODO: This endpoint seems to return the same data as normal list.
 func (o *Snapshots) NewListDetailed() *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
