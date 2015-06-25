@@ -13,6 +13,12 @@ type DriveRequest struct {
 	Name  string `json:"name"`
 	Size  int    `json:"size"`
 }
+type Drive struct {
+	BootOrder  int    `json:"boot_order"`
+	DevChannel string `json:"dev_channel"`
+	Device     string `json:"device"`
+	Uuid       string `json:"drive"`
+}
 
 // NewDrives returns a Drives object.
 func NewDrives() *Drives {
@@ -46,5 +52,21 @@ func (o *Drives) NewDelete(objectId string) *Args {
 	o.Args.Verb = "DELETE"
 	o.Args.RequiresAuth = true
 	o.Args.ObjectId = objectId
+	return o.Args
+}
+
+// NewListDetailed returns the args required for a Drives GET request.
+func (o *Drives) NewListDetailed() *Args {
+	o.Args.Verb = "GET"
+	o.Args.RequiresAuth = true
+	o.Args.Resource += "/detail"
+	return o.Args
+}
+
+// NewGet returns the args required for a Drives GET request.
+func (o *Drives) NewGet(uuid string) *Args {
+	o.Args.Verb = "GET"
+	o.Args.RequiresAuth = true
+	o.Args.Resource += "/" + uuid + "/"
 	return o.Args
 }

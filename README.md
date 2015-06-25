@@ -40,10 +40,10 @@ https://github.com/russmack/cloudsigmarepl
 - [X] Notification preferences [list, edit]
 - [X] Notification contacts [list, create, edit, delete]
 - [X] Servers [list, create, edit, delete, start, stop, shutdown]
-- [X] Drives [list, create, delete]
+- [X] Drives [list, list detailed, get single, create, delete]
 - [X] Snapshots
-- [X] Vlans
-- [X] IP addresses
+- [X] Vlans [list, list detailed, get single]
+- [X] IP addresses [list, list detailed, get single]
 - [X] ACLs
 
 ## License
