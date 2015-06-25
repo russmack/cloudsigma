@@ -44,3 +44,11 @@ func (o *Snapshots) NewGet(uuid string) *Args {
 	o.Args.Resource += "/" + uuid + "/"
 	return o.Args
 }
+
+// Delete returns the args required to delete a drive.
+func (o *Snapshots) NewDelete(objectId string) *Args {
+	o.Args.Verb = "DELETE"
+	o.Args.RequiresAuth = true
+	o.Args.ObjectId = objectId
+	return o.Args
+}
