@@ -23,3 +23,11 @@ func (o *Acls) NewList() *Args {
 	o.Args.RequiresAuth = true
 	return o.Args
 }
+
+// NewGet returns the args required for a Acls GET request.
+func (o *Acls) NewGet(uuid string) *Args {
+	o.Args.Verb = "GET"
+	o.Args.RequiresAuth = true
+	o.Args.Resource += "/" + uuid + "/"
+	return o.Args
+}

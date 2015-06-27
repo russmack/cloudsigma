@@ -44,7 +44,7 @@ https://github.com/russmack/cloudsigmarepl
 - [X] Snapshots [list, list detailed, get single, delete]
 - [X] Vlans [list, list detailed, get single]
 - [X] IP addresses [list, list detailed, get single]
-- [X] ACLs
+- [X] ACLs [list, get single]
 
 ## License
 BSD 3-Clause: [LICENSE.txt](LICENSE.txt)
