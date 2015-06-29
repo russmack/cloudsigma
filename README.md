@@ -46,6 +46,7 @@ https://github.com/russmack/cloudsigmarepl
 - [X] IP addresses [list, list detailed, get single]
 - [X] ACLs [list, get single]
 - [X] Tags [list, get single]
+- [X] Logs [list]
 
 ## License
 BSD 3-Clause: [LICENSE.txt](LICENSE.txt)
