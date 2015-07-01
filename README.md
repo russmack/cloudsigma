@@ -47,6 +47,7 @@ https://github.com/russmack/cloudsigmarepl
 - [X] ACLs [list, get single]
 - [X] Tags [list, get single]
 - [X] Logs [list]
+- [X] Firewall Policies [list]
 
 ## License
 BSD 3-Clause: [LICENSE.txt](LICENSE.txt)
