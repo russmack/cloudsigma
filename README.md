@@ -49,6 +49,7 @@ https://github.com/russmack/cloudsigmarepl
 - [X] Logs [list]
 - [X] Jobs [list]
 - [X] Firewall Policies [list]
+- [X] Keypairs [list]
 
 ## License
 BSD 3-Clause: [LICENSE.txt](LICENSE.txt)
