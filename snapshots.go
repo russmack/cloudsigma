@@ -45,7 +45,17 @@ func (o *Snapshots) NewGet(uuid string) *Args {
 	return o.Args
 }
 
-// Delete returns the args required to delete a drive.
+// Create returns the args required to create a snapshot.
+func (o *Snapshots) NewCreate(snapshot SnapshotRequest) *Args {
+	o.Args.Verb = "POST"
+	o.Args.RequiresAuth = true
+	o.Args.AddHeaderPair("Content-Type", "application/json")
+	body := struct{ SnapshotRequest }{snapshot}
+	o.Args.Body = body
+	return o.Args
+}
+
+// Delete returns the args required to delete a snapshot.
 func (o *Snapshots) NewDelete(objectId string) *Args {
 	o.Args.Verb = "DELETE"
 	o.Args.RequiresAuth = true
