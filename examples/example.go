@@ -23,6 +23,7 @@ func main() {
 	location := "zrh"
 
 	calls := map[string]func(string, string, string) []byte{
+		//"DownloadImage": getImage,
 		"ApiUrls":                     getApiUrls,
 		"CloudStatus":                 getCloudStatus,
 		"CloudStatusXML":              getCloudStatusXml,
@@ -338,6 +339,28 @@ func getSnapshots(location string, username string, password string) []byte {
 	// Create a client.
 	client := &cloudsigma.Client{}
 	resp, err := client.Call(nil, args)
+	if err != nil {
+		fmt.Println("Error calling client.", err)
+		return []byte{}
+	}
+	return resp
+}
+func getImage(location string, username string, password string, driveUuid string) []byte {
+	if !confirmProceed() {
+		return []byte("Skipping.")
+	}
+
+	// Create an Images.
+	o := cloudsigma.NewImages()
+	args := o.NewDownload(driveUuid)
+	args.Username = username
+	args.Password = password
+	args.Location = location
+
+	// Create a client.
+	client := &cloudsigma.Client{}
+	//resp, err := client.Call(nil, args)
+	resp, err := client.Download(nil, args)
 	if err != nil {
 		fmt.Println("Error calling client.", err)
 		return []byte{}

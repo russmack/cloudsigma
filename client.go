@@ -7,10 +7,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -126,6 +128,19 @@ func (c *Client) Call(client *http.Client, args *Args) ([]byte, error) {
 	return resp, nil
 }
 
+// Download builds and sends a request, given Args, and saves the body to file.
+func (c *Client) Download(client *http.Client, args *Args) ([]byte, error) {
+	req, err := c.buildRequest(args)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := c.sendDownloadRequest(client, req)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 // buildRequest creates a http CloudSigmaRequest with the supplied Args.
 func (c *Client) buildRequest(args *Args) (*CloudSigmaRequest, error) {
 	u, err := c.buildResourceUrl(args.Location, args.Resource)
@@ -202,6 +217,7 @@ func (c *Client) sendRequest(client *http.Client, req *CloudSigmaRequest) ([]byt
 		client = &http.Client{}
 	}
 	req.Header.Add("Accept-Encoding", "identity")
+	fmt.Printf("Req: %+v\n", req.Request)
 	resp, err := client.Do(req.Request)
 	if err != nil {
 		log.Println("Error in client.Do.")
@@ -218,6 +234,34 @@ func (c *Client) sendRequest(client *http.Client, req *CloudSigmaRequest) ([]byt
 		return []byte{}, err
 	}
 	return body, nil
+}
+
+// sendRequest sends the given http CloudSigmaRequest and returns the result.
+func (c *Client) sendDownloadRequest(client *http.Client, req *CloudSigmaRequest) ([]byte, error) {
+	f, err := os.Create("download.img")
+	defer f.Close()
+
+	if client == nil {
+		client = &http.Client{}
+	}
+	req.Header.Add("Accept-Encoding", "identity")
+	fmt.Printf("Req: %+v\n", req.Request)
+	resp, err := client.Do(req.Request)
+	if err != nil {
+		log.Println("Error in client.Do.")
+		log.Println(err)
+		return []byte{}, err
+	}
+	defer resp.Body.Close()
+	if !strings.HasPrefix(strconv.Itoa(resp.StatusCode), "2") {
+		return []byte{}, errors.New(resp.Status)
+	}
+	_, err = io.Copy(f, resp.Body)
+	if err != nil {
+		log.Println("Error in io.Copy.")
+		return []byte{}, err
+	}
+	return []byte("OK"), nil
 }
 
 // GetHttpBasicAuthHeader returns a base 64 encoded auth header,
