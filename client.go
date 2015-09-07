@@ -34,6 +34,7 @@ type Args struct {
 	Password     string
 	Location     string
 	Format       string
+	OutFile      string
 }
 
 // Header is a name value pair http header.
@@ -134,7 +135,7 @@ func (c *Client) Download(client *http.Client, args *Args) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	resp, err := c.sendDownloadRequest(client, req)
+	resp, err := c.sendDownloadRequest(client, req, args.OutFile)
 	if err != nil {
 		return nil, err
 	}
@@ -237,8 +238,8 @@ func (c *Client) sendRequest(client *http.Client, req *CloudSigmaRequest) ([]byt
 }
 
 // sendRequest sends the given http CloudSigmaRequest and returns the result.
-func (c *Client) sendDownloadRequest(client *http.Client, req *CloudSigmaRequest) ([]byte, error) {
-	f, err := os.Create("download.img")
+func (c *Client) sendDownloadRequest(client *http.Client, req *CloudSigmaRequest, filename string) ([]byte, error) {
+	f, err := os.Create(filename)
 	defer f.Close()
 
 	if client == nil {

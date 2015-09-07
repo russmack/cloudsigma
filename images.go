@@ -42,10 +42,11 @@ func (o *Images) NewListDetailed() *Args {
 */
 
 // NewGet returns the args required for a Images GET request.
-func (o *Images) NewDownload(uuid string) *Args {
+func (o *Images) NewDownload(uuid string, filename string) *Args {
 	o.Args.Verb = "GET"
 	o.Args.RequiresAuth = true
 	o.Args.Resource += "/" + uuid + "/download"
+	o.Args.OutFile = filename
 	return o.Args
 }
 

@@ -345,14 +345,14 @@ func getSnapshots(location string, username string, password string) []byte {
 	}
 	return resp
 }
-func getImage(location string, username string, password string, driveUuid string) []byte {
+func getImage(location string, username string, password string, driveUuid string, filename string) []byte {
 	if !confirmProceed() {
 		return []byte("Skipping.")
 	}
 
 	// Create an Images.
 	o := cloudsigma.NewImages()
-	args := o.NewDownload(driveUuid)
+	args := o.NewDownload(driveUuid, outFilename)
 	args.Username = username
 	args.Password = password
 	args.Location = location
