@@ -352,7 +352,7 @@ func getImage(location string, username string, password string, driveUuid strin
 
 	// Create an Images.
 	o := cloudsigma.NewImages()
-	args := o.NewDownload(driveUuid, outFilename)
+	args := o.NewDownload(driveUuid, filename)
 	args.Username = username
 	args.Password = password
 	args.Location = location
