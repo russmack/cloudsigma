@@ -42,6 +42,7 @@ https://github.com/russmack/cloudsigmarepl
 - [X] Servers [list, create, edit, delete, start, stop, shutdown]
 - [X] Drives [list, list detailed, get single, create, delete]
 - [X] Snapshots [list, list detailed, get single, create, delete]
+- [X] Images [download]
 - [X] VLANs [list, list detailed, get single]
 - [X] IP addresses [list, list detailed, get single]
 - [X] ACLs [list, get single]
