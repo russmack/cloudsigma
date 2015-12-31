@@ -2,6 +2,8 @@
 
 A Golang REST client for the CloudSigma IaaS.
 
+Superseded by: [cloudsigmalib](https://github.com/russmack/cloudsigmalib)
+
 [![Build Status](https://travis-ci.org/russmack/cloudsigma.svg?branch=master)](https://travis-ci.org/russmack/cloudsigma)
 
 ## Usage
